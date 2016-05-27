@@ -12,6 +12,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
     "morgan": "^1.7.0",
     "pug": "^2.0.0-alpha8",
