@@ -1,3 +1,3 @@
 module.exports.index = (req, res) => {
-  res.render('index', { title: 'Haloha, bro!' })
+  res.render('index', { title: 'Haloha, bra!' })
 }
