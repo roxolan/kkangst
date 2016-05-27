@@ -21,7 +21,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use(express.static(path.join(__dirname, '..', '/public')))
-app.use('/angular', express.static(path.join(__dirname, '..', '/node_modules/angular' )))
+app.use('/angular', express.static(path.join(__dirname, '..', '/node_modules/angular')))
+app.use('/jquery', express.static(path.join(__dirname, '..', '/node_modules/jquery/dist')))
+
 
 app.use('/', routes)
 app.use('/users', users)
