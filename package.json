@@ -1,7 +1,7 @@
 {
   "name": "kkangst",
   "version": "0.0.1",
-  "description": "Gradusl Angular+Grunt assent",
+  "description": "Gradual Angular+Grunt assent",
   "private": true,
   "author": "Viktor Kotusenko",
   "engines": {
@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "express": "^4.13.4",
-    "pug": "^2.0.0-alpha8"
+    "morgan": "^1.7.0",
+    "pug": "^2.0.0-alpha8",
+    "serve-favicon": "^2.3.0"
   }
 }
