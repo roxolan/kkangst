@@ -1,6 +1,3 @@
-const gulp = require('gulp')
-const gutil = require('gulp-util')
+const requireDir = require('require-dir')
 
-gulp.task('default', () => {
-  return gutil.log('Gulp works!')
-})
+requireDir('./lib/gulp/tasks', {recurse: true})
