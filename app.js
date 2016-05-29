@@ -5,30 +5,30 @@ const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 
-const routes = require('../server/routes/index')
-const users = require('../server/routes/users')
+const routes = require('./src/server/routes/index')
+const users = require('./src/server/routes/users')
 
 
 const app = express()
 
-app.set('views', path.join(__dirname, '..', 'server', 'views'))
+app.set('views', path.join(__dirname, 'server', 'views'))
 app.set('view engine', 'pug')
 
-app.use(favicon(path.join(__dirname, '..', 'public/favicon.ico')))
+app.use(favicon(path.join(__dirname, 'public/favicon.ico')))
 app.use(logger('dev'))
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use(express.static(path.join(__dirname, '..', '/public')))
-app.use('/angular', express.static(path.join(__dirname, '..', '/node_modules/angular')))
-app.use('/bootstrap', express.static(path.join(__dirname, '..', '/node_modules/bootstrap/dist')))
-app.use('/jquery', express.static(path.join(__dirname, '..', '/node_modules/jquery/dist')))
+app.use(express.static(path.join(__dirname, 'public')))
+app.use('/angular', express.static(path.join(__dirname, 'node_modules/angular')))
+app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')))
+app.use('/jquery', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 
 
 // app.use('/', routes)
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'app', 'index.html'))
+  res.sendFile(path.join(__dirname, 'src', 'client', 'app', 'index.html'))
 })
 app.use('/users', users)
 
