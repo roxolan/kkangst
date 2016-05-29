@@ -1,0 +1,29 @@
+{
+  "paths": {
+    "client": "src/client/",
+    "server": "src/server/",
+    "publicall": [
+      "public/css/*",
+      "public/img/*",
+      "public/js/*"
+    ],
+    "publiccss": "public/css/",
+    "publicjs": "public/js/",
+    "appless": [
+      "client/less/import.less"
+    ],
+    "includes": [
+      "lib/less/includes/"
+    ],
+    "vendorcss": [
+      "node_modules/bootstrap/dist/css/bootstrap.css"
+    ],
+    "appjs": [
+      "client/app/primus.js",
+      "client/app/secundus.js"
+    ],
+    "vendorjs": [
+      "node_modules/bootstrap/dist/js/bootstrap.js"
+    ]
+  }
+}
