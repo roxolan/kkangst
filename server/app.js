@@ -26,7 +26,10 @@ app.use('/bootstrap', express.static(path.join(__dirname, '..', '/node_modules/b
 app.use('/jquery', express.static(path.join(__dirname, '..', '/node_modules/jquery/dist')))
 
 
-app.use('/', routes)
+// app.use('/', routes)
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'app', 'index.html'))
+})
 app.use('/users', users)
 
 // catch 404 & forward to error handler
