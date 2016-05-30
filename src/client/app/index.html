@@ -6,10 +6,16 @@
   <link rel="stylesheet" href="/css/app.css">
 </head>
 
-<body ng-controller="MainCtrl">
-  <div ng-model="vm">
-    &nbsp; I am {{ vm.title }}
+<body ng-controller="MainCtrl as ctrl">
+  <h1>Salve, {{70 + 3}}</h1>
+  <div>
+    &nbsp; I am {{ ctrl.title }}
   </div>
+
+  <input type="text" ng-model="ctrl.name" placeholder="Enter your name">
+
+  <h2>Haloha, {{ctrl.name}} </h2>
+
   <script src="/assets/angular/angular.js"></script>
   <script src="/js/app.js"></script>
 </body>
