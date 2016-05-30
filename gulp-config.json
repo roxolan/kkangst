@@ -10,17 +10,19 @@
     "publiccss": "public/css/",
     "publicjs": "public/js/",
     "appless": [
-      "src/client/less/import.less"
+      "src/client/less/import.less",
+      "src/client/less/variables.less"
     ],
     "includes": [
-      "lib/less/includes/"
+      "lib/less/includes/",
+      "node_modules/"
     ],
     "vendorcss": [
-      "node_modules/bootstrap/dist/css/bootstrap.css"
     ],
     "appjs": [
       "src/client/app/primus.js",
-      "src/client/app/secundus.js"
+      "src/client/app/secundus.js",
+      "src/client/app/app.js"
     ],
     "vendorjs": [
       "node_modules/bootstrap/dist/js/bootstrap.js"

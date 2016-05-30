@@ -54,9 +54,9 @@ gulp.task('watch-less', [ 'less' ], () => {
 })
 
 gulp.task('w', [ 'watch-less', 'watch-js' ], () => {
-  return gutil.log('running gulp watch on less & js')
+  return gutil.log('running gulp watch on less & js. vendor from CDNs')
 })
 
 gulp.task('default', [ 'less', 'js-app-uglify' ], () => {
-  return gutil.log('With js-concat, primitive!')
+  return gutil.log('With app & vendor from CDNs')
 })
