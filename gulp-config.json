@@ -20,7 +20,8 @@
     "vendorcss": [
     ],
     "appjs": [
-      "src/client/app/app.js"
+      "src/client/app/app.js",
+      "src/client/app/main.js"
     ],
     "vendorjs": [
       "node_modules/bootstrap/dist/js/bootstrap.js"
