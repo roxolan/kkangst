@@ -20,8 +20,6 @@
     "vendorcss": [
     ],
     "appjs": [
-      "src/client/app/primus.js",
-      "src/client/app/secundus.js",
       "src/client/app/app.js"
     ],
     "vendorjs": [
