@@ -8,5 +8,8 @@ angular.module('kkangst')
   .config([ '$stateProvider', '$urlRouterProvider',
     function ($stateProvider, $urlRouterProvider) {
       var htmlClass = {}
+
+      $urlRouterProvider
+        .otherwise('/home')
     }
   ])
