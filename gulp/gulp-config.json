@@ -1,31 +1,35 @@
 {
   "paths": {
-    "client": "../src/client/",
-    "server": "../src/server/",
+    "client": "src/client/",
+    "server": "src/server/",
     "publicall": [
-      "../public/css/*",
-      "../public/img/*",
-      "../public/js/*"
+      "public/css/*",
+      "public/img/*",
+      "public/js/*",
+      "public/html/*"
     ],
-    "publiccss": "../public/css/",
+    "publiccss": "public/css/",
     "publicjs": "public/js/",
     "appless": [
-      "../src/client/less/import.less",
-      "../src/client/less/variables.less"
+      "src/client/**/*.less"
     ],
     "includes": [
-      "../lib/less/includes/",
-      "../node_modules/"
+      "lib/less/includes/",
+      "node_modules/"
     ],
     "vendorcss": [
     ],
     "appjs": [
-      "../src/client/app/app.js",
-      "../src/client/app/main.js",
-      "../src/client/app/config.router.js"
+      "src/client/app/app.js",
+      "src/client/app/main.js",
+      "src/client/app/config.router.js"
     ],
     "vendorjs": [
-      "../node_modules/bootstrap/dist/js/bootstrap.js"
+      "node_modules/bootstrap/dist/js/bootstrap.js"
+    ],
+    "appswig": [
+      "src/client/app/**/*.html",
+      "!**/_*.html"
     ]
   }
 }

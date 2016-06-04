@@ -1,6 +1,6 @@
 const gulp = require('gulp')
 const gutil = require('gulp-util')
 
-gulp.task('default', [ 'less', 'js-app-uglify' ], () => {
-  return gutil.log('With app & vendor from CDNs')
+gulp.task('default', [ 'less', 'js-app-uglify', 'swigtest' ], () => {
+  return gutil.log('With swig')
 })
