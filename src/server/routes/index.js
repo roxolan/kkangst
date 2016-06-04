@@ -1,7 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const ctrlMain = require('../controllers/main')
+const ctrlCourses = require('../controllers/courses')
+const ctrlOthers = require('../controllers/others')
 
-router.get('/', ctrlMain.index)
+router.get('/', ctrlCourses.homelist)
+router.get('/course', ctrlCourses.courseInfo)
+router.get('/course/review/new', ctrlCourses.addReview)
+
+router.get('/about', ctrlOthers.about)
 
 module.exports = router
