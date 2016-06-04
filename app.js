@@ -25,7 +25,7 @@ app.use('/assets', express.static(path.join(__dirname, 'node_modules')))
 
 // app.use('/', routes)
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, 'src', 'client', 'app', 'index.html'))
+  res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'))
 })
 app.use('/users', users)
 
