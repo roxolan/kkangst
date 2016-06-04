@@ -11,7 +11,7 @@ gulp.task('watch-less', [ 'less' ], () => {
   gulp.watch(config.paths.appless, ['less'])
 })
 
-gulp.task('watch-swig', [ 'swigtest' ], () => {
+gulp.task('watch-swig', [ 'swig' ], () => {
   gulp.watch(config.paths.appswig, ['swigtest'])
 })
 
