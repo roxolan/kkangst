@@ -8,7 +8,6 @@ const bodyParser = require('body-parser')
 const routes = require('./src/server/routes/index')
 const users = require('./src/server/routes/users')
 
-
 const app = express()
 
 app.set('views', path.join(__dirname, 'src', 'server', 'views'))
@@ -21,13 +20,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use(express.static(path.join(__dirname, 'public')))
-app.use('/assets', express.static(path.join(__dirname, 'node_modules')))
+app.use('/assets', express.static(path.join(__dirname, './node_modules')))
 
-// app.use('/', routes)
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'))
-})
-app.use('/users', users)
+app.use('/', routes)
+/*
+ app.use((req, res) => {
+ res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'))
+ })
+ app.use('/users', users)
+ */
 
 // catch 404 & forward to error handler
 app.use((req, res, next) => {
