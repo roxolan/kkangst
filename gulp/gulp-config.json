@@ -18,6 +18,7 @@
       "node_modules/"
     ],
     "vendorcss": [
+      "lib/bootstrap/*.css"
     ],
     "appjs": [
       "src/client/app/app.js",

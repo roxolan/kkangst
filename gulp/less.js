@@ -6,7 +6,15 @@ const plumber = require('gulp-plumber')
 
 const config = require('./gulp-config.json')
 
-gulp.task('less', [ 'clean' ], () => {
+gulp.task('vendor-css', [ 'clean' ], () => {
+  return gulp.src(config.paths.vendorcss)
+    .pipe(plumber())
+    .pipe(concat('vendor.css'))
+    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(gulp.dest(config.paths.publiccss))
+})
+
+gulp.task('less', [ 'clean', 'vendor-css' ], () => {
   return gulp.src(config.paths.appless)
     .pipe(plumber())
     .pipe(less({
