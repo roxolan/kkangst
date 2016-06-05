@@ -1,5 +1,5 @@
 module.exports.homelist = (req, res) => {
-  res.render('index', { title: 'Домашня сторінка' })
+  res.render('courses-list', { title: 'Перелік курсів' })
 }
 
 module.exports.courseInfo = (req, res) => {
