@@ -3,10 +3,23 @@ html
   head
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title= title
-    link(rel='stylesheet', href='/assets/bootstrap/dist/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/app.css')
 
   body
-    block content
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          a.navbar-brand(href='/') LMS
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar-main')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        #navbar-main.navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li
+              a(href='/about/') Про LMS
+    .container
+      block content
 
     script(src='/assets/angular/angular.js')
     script(src='/assets/jquery/dist/jquery.js')
