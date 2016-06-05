@@ -1,6 +1,7 @@
 'use strict'
 
 angular.module('kkangst', [
+  'ngRoute',
   'ngResource',
   'ngSanitize',
   'ngTouch',

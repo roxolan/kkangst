@@ -1,15 +1,15 @@
 angular.module('kkangst')
   .run([ '$rootScope', '$state', '$stateParams',
-    function ($rootScope, $state, $stateParams) {
-      $rootScope.$state = $state
-      $rootScope.$stateParams = $stateParams
-    }
-  ])
-  .config([ '$stateProvider', '$urlRouterProvider',
-    function ($stateProvider, $urlRouterProvider) {
-      var htmlClass = {}
+         function ($rootScope, $state, $stateParams) {
+           $rootScope.$state = $state
+           $rootScope.$stateParams = $stateParams
+         }
+       ])
 
-      $urlRouterProvider
-        .otherwise('/home')
-    }
-  ])
+  .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: '/website/home.html'
+      })
+      // $locationProvider.html5Mode(true)
+  }])
