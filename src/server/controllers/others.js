@@ -1,3 +1,3 @@
 module.exports.about = (req, res) => {
-  res.render('index', { title: 'Про LMS' })
+  res.render('generic-text', { title: 'Про LMS' })
 }
