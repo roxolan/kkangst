@@ -7,5 +7,5 @@ module.exports.courseInfo = (req, res) => {
 }
 
 module.exports.addReview = (req, res) => {
-  res.render('index', { title: 'Додати примітку' })
+  res.render('course-review-form', { title: 'Додати примітку' })
 }
