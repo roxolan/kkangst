@@ -3,7 +3,7 @@ module.exports.homelist = (req, res) => {
 }
 
 module.exports.courseInfo = (req, res) => {
-  res.render('index', { title: 'Інформація про курс' })
+  res.render('course-info', { title: 'Інформація про курс' })
 }
 
 module.exports.addReview = (req, res) => {
