@@ -1,0 +1,83 @@
+extends layout
+
+block content
+  .row.page-header
+    .col-lg-12
+        h1 Стратегічна ідея
+
+  .row
+    .col-xs-12.col-md-9
+      .row
+        .col-xs-12.col-sm-6
+          p.rating
+            span.glyphicon.glyphicon-star
+            span.glyphicon.glyphicon-star
+            span.glyphicon.glyphicon-star
+            span.glyphicon.glyphicon-star-empty
+            span.glyphicon.glyphicon-star-empty
+          p 125 High Street, Reading, RG6 1PS
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Заняття
+            .panel-body
+              p Вівторок, 7 червня 2016, 10:00-13:15, ауд. 410
+              p П'ятниця, 10 червня 2016, 15:00-18:15, ауд. 410
+              p Понеділок, 13 червня 2016, 10:00-13:15, ауд. 410
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Групи
+            .panel-body
+              span.label.label-warning
+                span.glyphicon.glyphicon-ok
+                | &nbsp;PMBA
+              | &nbsp;
+              span.label.label-warning
+                span.glyphicon.glyphicon-ok
+                | &nbsp;EMBA
+              | &nbsp;
+              span.label.label-warning
+                span.glyphicon.glyphicon-ok
+                | &nbsp;EMBA(Agro)
+              | &nbsp;
+        .col-xs-12.col-sm-6.location-map
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Розташування
+            .panel-body
+              img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=51.455041,-0.9690884&zoom=17&size=400x350&sensor=false&markers=51.455041,-0.9690884&scale=2')
+      .row
+        .col-xs-12
+          .panel.panel-primary.review-panel
+            .panel-heading
+              a.btn.btn-default.pull-right(href='/course/review/new') Додати коментар
+              h2.panel-title Коментарі
+            .panel-body.review-container
+              .row
+                .review
+                  .well.well-sm.review-header
+                    span.rating
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star-empty
+                    span.reviewAuthor Віктор Оксенюк
+                    small.reviewTimestamp 13 червня 2016
+                  .col-xs-12
+                    p Прохання викласти матеріали в LMS
+              .row
+                .review
+                  .well.well-sm.review-header
+                    span.rating
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                    span.reviewAuthor Михайло Травецький
+                    small.reviewTimestamp 14 червня 2016
+                  .col-xs-12
+                    p Що порадите почитати в розвиток? Де можна дістати переклад Пітера Сенге?
+    .col-xs-12.col-md-3
+      p.lead Курс, що є фундаментальним для цілої програми навчання в Школі
+      p Якщо ви пройшли цей курс і маєте що сказати - прохання залишити коментар
