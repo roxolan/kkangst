@@ -4,8 +4,8 @@ block content
   #banner.page-header
     .row
       .col-lg-6
-        h1 LMS
-         small &nbsp;Оберіть курси, які вам потрібні
+        h1= pageHeader.title
+         small &nbsp;#{pageHeader.strapline}
 
   .row
     .col-xs-12.col-sm-8
@@ -48,4 +48,4 @@ block content
             | &nbsp;
 
     .col-xs-12.col-sm-4
-      p.lead Цей сервіс допоможе вам обрати потрібні шляхи навчання
+      p.lead= sidebar

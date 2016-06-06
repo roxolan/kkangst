@@ -1,5 +1,12 @@
 module.exports.homelist = (req, res) => {
-  res.render('courses-list', { title: 'Перелік курсів' })
+  res.render('courses-list', {
+    title: 'Перелік курсів',
+    pageHeader: {
+      title: 'LMS',
+      strapline: 'Оберіть курси, які вам потрібні'
+    },
+    sidebar: 'Цей сервіс допоможе вам обрати потрібні шляхи навчання і самостійного вдосконалення'
+  })
 }
 
 module.exports.courseInfo = (req, res) => {
