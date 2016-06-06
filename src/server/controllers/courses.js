@@ -5,7 +5,26 @@ module.exports.homelist = (req, res) => {
       title: 'LMS',
       strapline: 'Оберіть курси, які вам потрібні'
     },
-    sidebar: 'Цей сервіс допоможе вам обрати потрібні шляхи навчання і самостійного вдосконалення'
+    sidebar: 'Цей сервіс допоможе вам обрати потрібні шляхи навчання і самостійного вдосконалення',
+    courses: [{
+      name: 'Стратегічна ідея',
+      address: 'Київ, вул. Волоська, 8/5, корп.4',
+      rating: 5,
+      groups: ['PMBA', 'EMBA', 'EMBA(Agro)'],
+      distance: '250m'
+    }, {
+      name: 'Маркетинг',
+      address: 'Київ, вул. Волоська, 8/5, корп.4',
+      rating: 4,
+      groups: ['PMBA', 'EMBA', 'EMBA(Agro)'],
+      distance: '250m'
+    }, {
+      name: 'Управління якістю',
+      address: 'Київ, вул. Волоська, 8/5, корп.4',
+      rating: 3,
+      groups: ['PMBA', 'EMBA', 'EMBA(Agro)'],
+      distance: '250m'
+    }]
   })
 }
 

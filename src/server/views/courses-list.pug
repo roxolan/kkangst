@@ -10,42 +10,21 @@ block content
   .row
     .col-xs-12.col-sm-8
       .row.list-group
-        .col-xs-12.list-group-item
-          h4
-            a(href="/course") Стратегічна ідея
-            small &nbsp;
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star-empty
-              span.glyphicon.glyphicon-star-empty
-            span.badge.pull-right.badge-default 100m
-          p.address 125 High Street, Reading, RG6 1PS
-          p
-            span.label.label-warning PMBA
-            | &nbsp;
-            span.label.label-warning EMBA
-            | &nbsp;
-            span.label.label-warning EMBA(Agro)
-            | &nbsp;
-        .col-xs-12.list-group-item
-          h4
-            a(href="/course") Маркетинг
-            small &nbsp;
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star-empty
-              span.glyphicon.glyphicon-star-empty
-            span.badge.pull-right.badge-default 100m
-          p.address 125 High Street, Reading, RG6 1PS
-          p
-            span.label.label-warning PMBA
-            | &nbsp;
-            span.label.label-warning EMBA
-            | &nbsp;
-            span.label.label-warning EMBA(Agro)
-            | &nbsp;
-
+        each course in courses
+          .col-xs-12.list-group-item
+            h4
+              a(href="/course")= course.name
+              small &nbsp;
+                span.glyphicon.glyphicon-star
+                span.glyphicon.glyphicon-star
+                span.glyphicon.glyphicon-star
+                span.glyphicon.glyphicon-star-empty
+                span.glyphicon.glyphicon-star-empty
+              span.badge.pull-right.badge-default= course.distance
+            p.address= course.address
+            p
+              each group in course.groups
+                span.label.label-warning= group
+                | &nbsp;
     .col-xs-12.col-sm-4
       p.lead= sidebar
