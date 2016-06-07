@@ -1,5 +1,7 @@
 extends layout
 
+include _includes/sharedHTMLfunctions
+
 block content
   #banner.page-header
     .row
@@ -15,11 +17,7 @@ block content
             h4
               a(href="/course")= course.name
               small &nbsp;
-                span.glyphicon.glyphicon-star
-                span.glyphicon.glyphicon-star
-                span.glyphicon.glyphicon-star
-                span.glyphicon.glyphicon-star-empty
-                span.glyphicon.glyphicon-star-empty
+                +outputRating(course.rating)
               span.badge.pull-right.badge-default= course.distance
             p.address= course.address
             p
