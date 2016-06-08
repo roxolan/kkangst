@@ -4,6 +4,7 @@ const favicon = require('serve-favicon')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
+require('./src/server/models/db')
 
 const routes = require('./src/server/routes/index')
 const users = require('./src/server/routes/users')
