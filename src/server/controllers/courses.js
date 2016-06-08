@@ -75,5 +75,10 @@ module.exports.courseInfo = (req, res) => {
 }
 
 module.exports.addReview = (req, res) => {
-  res.render('course-review-form', { title: 'Додати примітку' })
+  res.render('course-review-form', {
+    title: 'Додати примітку',
+    pageHeader: {
+      title: 'Коментар на курс: Стратегічна ідея'
+    }
+  })
 }
