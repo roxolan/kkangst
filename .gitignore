@@ -2,7 +2,7 @@
 .project
 .settings/
 
-
+logfile
 node_modules
 npm-debug.log
 
