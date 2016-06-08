@@ -29,7 +29,49 @@ module.exports.homelist = (req, res) => {
 }
 
 module.exports.courseInfo = (req, res) => {
-  res.render('course-info', { title: 'Інформація про курс' })
+  res.render('course-info', {
+    title: 'Інформація про курс',
+    pageHeader: {
+      title: 'Стратегічна ідея'
+    },
+    sidebar: {
+      context: ' - курс, що є фундаментальним для цілої програми навчання в Школі',
+      callToAction: 'Якщо ви пройшли цей курс і маєте що сказати - прохання залишити коментар'
+    },
+    course: {
+      name: 'Стратегічна ідея',
+      address: 'Київ, вул. Волоська, 8/5, корп.4',
+      rating: 5,
+      groups: ['PMBA', 'EMBA', 'EMBA(Agro)'],
+      classTimes: [{
+        day: 'Вівторок',
+        date: '7 червня 2016',
+        timing: '10:00-13:15',
+        room: 'ауд. 410'
+      }, {
+        day: 'П\'ятниця',
+        date: '10 червня 2016',
+        timing: '15:00-18:15',
+        room: 'ауд. 410'
+      }, {
+        day: 'Понеділок',
+        date: '13 червня 2016',
+        timing: '10:00-13:15',
+        room: 'ауд. 410'
+      }],
+      reviews: [{
+        author: 'Віктор Оксенюк',
+        rating: 4,
+        timestamp: '13 червня 2016',
+        reviewText: 'Прохання викласти матеріали в LMS'
+      }, {
+        author: 'Михайло Травецький',
+        rating: 5,
+        timestamp: '14 червня 2016',
+        reviewText: 'Що порадите почитати в розвиток? Де можна дістати переклад Пітера Сенге?'
+      }]
+    }
+  })
 }
 
 module.exports.addReview = (req, res) => {
