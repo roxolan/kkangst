@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
-const dbURI = 'mongodb://localhost/kkangst'
+var dbURI = 'mongodb://localhost/kkangst'
 var gracefulShutdown
+
+if (process.env.NODE_ENV === 'production') {
+  dbURI = process.env.MONGODB_URI
+}
 
 mongoose.connect(dbURI)
 
