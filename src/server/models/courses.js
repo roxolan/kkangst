@@ -28,7 +28,7 @@ const reviewSchema = new mongoose.Schema({
   }
 })
 
-const locationSchema = new mongoose.Schema({
+const courseSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -50,4 +50,4 @@ const locationSchema = new mongoose.Schema({
   reviews: [reviewSchema]
 })
 
-mongoose.model('Course', locationSchema)
+mongoose.model('Course', courseSchema)
