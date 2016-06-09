@@ -41,11 +41,6 @@ const courseSchema = new mongoose.Schema({
     max: 5
   },
   groups: [String],
-  // Always store coordinates longitude, latitude order.
-  coords: {
-    type: [Number],
-    index: '2dsphere'
-  },
   classTimes: [classTimeSchema],
   reviews: [reviewSchema]
 })
