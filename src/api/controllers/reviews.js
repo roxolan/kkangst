@@ -1,8 +1,12 @@
+const mongoose = require('mongoose')
+const Course = mongoose.model('Course')
+
 // reviews for courses API controller
 
-// methods to be created:
+module.exports.reviewsCreate = (req, res) => { }
 
-// -- reviewsCreate
-// -- reviewsReadOne
-// -- reviewsUpdateOne
-// -- reviewsDeleteOne
+module.exports.reviewsReadOne = (req, res) => { }
+
+module.exports.reviewsUpdateOne = (req, res) => { }
+
+module.exports.reviewsDeleteOne = (req, res) => { }
