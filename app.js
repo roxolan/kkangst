@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 require('./src/server/models/db')
 
 const routes = require('./src/server/routes/index')
-const users = require('./src/server/routes/users')
+const routesApi = require('./src/api/routes/index')
 
 const app = express()
 
@@ -24,6 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/assets', express.static(path.join(__dirname, './node_modules')))
 
 app.use('/', routes)
+app.use('/api', routesApi)
+
 /*
  app.use((req, res) => {
  res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'))
