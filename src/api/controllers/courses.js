@@ -3,14 +3,31 @@ const Course = mongoose.model('Course')
 
 // courses API controller
 
-module.exports.coursesList = (req, res) => { }
+const sendJSONresponse = (res, status, content) => {
+  res.status(status)
+  res.json(content)
+}
 
-module.exports.coursesCreate = (req, res) => { }
+module.exports.coursesList = (req, res) => {
+  sendJSONresponse(res, 200, {'status': 'stub'})
+}
 
-module.exports.coursesReadOne = (req, res) => { }
+module.exports.coursesCreate = (req, res) => {
+  sendJSONresponse(res, 200, {'status': 'stub'})
+}
 
-module.exports.coursesList = (req, res) => { }
+module.exports.coursesReadOne = (req, res) => {
+  sendJSONresponse(res, 200, {'status': 'stub'})
+}
 
-module.exports.coursesUpdateOne = (req, res) => { }
+module.exports.coursesList = (req, res) => {
+  sendJSONresponse(res, 200, {'status': 'stub'})
+}
 
-module.exports.coursesDeleteOne = (req, res) => { }
+module.exports.coursesUpdateOne = (req, res) => {
+  sendJSONresponse(res, 200, {'status': 'stub'})
+}
+
+module.exports.coursesDeleteOne = (req, res) => {
+  sendJSONresponse(res, 200, {'status': 'stub'})
+}
