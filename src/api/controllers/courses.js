@@ -39,6 +39,8 @@ module.exports.coursesReadOne = (req, res) => {
   }
 }
 
+/* POST a new course */
+/* /api/courses */
 module.exports.coursesCreate = (req, res) => {
   Course.create({
     name: req.body.name,
@@ -73,10 +75,6 @@ module.exports.coursesCreate = (req, res) => {
       sendJsonResponse(res, 201, course)
     }
   })
-}
-
-module.exports.coursesList = (req, res) => {
-  sendJsonResponse(res, 200, {'status': 'stub'})
 }
 
 module.exports.coursesUpdateOne = (req, res) => {
