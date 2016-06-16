@@ -10,6 +10,7 @@ const sendJsonResponse = (res, status, content) => {
 
 /* POST a new course */
 /* /api/courses */
+// so far only tested via Postman
 module.exports.coursesCreate = (req, res) => {
   Course.create({
     name: req.body.name,
@@ -93,8 +94,59 @@ module.exports.coursesReadOne = (req, res) => {
   }
 }
 
+/* PUT /api/courses/:courseid */
 module.exports.coursesUpdateOne = (req, res) => {
-  sendJsonResponse(res, 200, {'status': 'stub'})
+  if (!req.params.courseid) {
+    sendJsonResponse(res, 404, {
+      'message': 'Not found, courseid is required'
+    })
+    return
+  }
+  Course
+    .findById(req.params.courseid)
+  // dashes in front mean "except"
+    .select('-reviews -rating')
+    .exec((err, course) => {
+      if (!course) {
+        sendJsonResponse(res, 404, {
+          'message': 'courseid not found'
+        })
+        return
+      } else if (err) {
+        sendJsonResponse(res, 400, err)
+        return
+      }
+      course.name = req.body.name
+      course.address = req.body.address
+      course.groups = req.body.groups.split(",")
+      course.classTimes = [
+        {
+          day: req.body.day1,
+          date: req.body.date1,
+          timing: req.body.timing1,
+          room: req.body.room1
+        },
+        {
+          day: req.body.day2,
+          date: req.body.date2,
+          timing: req.body.timing2,
+          room: req.body.room2
+        },
+        {
+          day: req.body.day3,
+          date: req.body.date3,
+          timing: req.body.timing3,
+          room: req.body.room3
+        }
+      ]
+      course.save((err, course) => {
+        if (err) {
+          sendJsonResponse(res, 404, err)
+        } else {
+          sendJsonResponse(res, 200, course)
+        }
+      })
+    })
 }
 
 module.exports.coursesDeleteOne = (req, res) => {
