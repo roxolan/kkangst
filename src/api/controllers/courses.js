@@ -8,37 +8,6 @@ const sendJsonResponse = (res, status, content) => {
   res.json(content)
 }
 
-module.exports.coursesList = (req, res) => {
-  sendJsonResponse(res, 200, {'status': 'stub'})
-}
-
-/* GET a course by the id */
-module.exports.coursesReadOne = (req, res) => {
-  if (req.params && req.params.courseid) {
-    console.log('Finding course details', req.params)
-    Course
-      .findById(req.params.courseid)
-      .exec((err, course) => {
-        if (!course) {
-          sendJsonResponse(res, 404, {
-            'message': 'courseid not found'
-          })
-          return
-        } else if (err) {
-          console.log(err)
-          sendJsonResponse(res, 404, err)
-          return
-        }
-        sendJsonResponse(res, 200, course)
-        console.log('-- reviews for this course: ', course.reviews)
-      })
-  } else {
-    sendJsonResponse(res, 404, {
-      'message': 'No courseid in request'
-    })
-  }
-}
-
 /* POST a new course */
 /* /api/courses */
 module.exports.coursesCreate = (req, res) => {
@@ -75,6 +44,53 @@ module.exports.coursesCreate = (req, res) => {
       sendJsonResponse(res, 201, course)
     }
   })
+}
+
+/* GET list of courses */
+module.exports.coursesList = (req, res) => {
+  Course
+    .find({})
+    .exec((err, courses) => {
+      if (!courses) {
+        sendJsonResponse(res, 404, {
+          'message': 'courses not found'
+        })
+        return
+      } else if (err) {
+        console.log(err)
+        sendJsonResponse(res, 404, err)
+        return
+      }
+      sendJsonResponse(res, 200, courses)
+      console.log('GET all courses: ', courses)
+    })
+}
+
+/* GET a course by the id */
+module.exports.coursesReadOne = (req, res) => {
+  if (req.params && req.params.courseid) {
+    console.log('Finding course details', req.params)
+    Course
+      .findById(req.params.courseid)
+      .exec((err, course) => {
+        if (!course) {
+          sendJsonResponse(res, 404, {
+            'message': 'courseid not found'
+          })
+          return
+        } else if (err) {
+          console.log(err)
+          sendJsonResponse(res, 404, err)
+          return
+        }
+        sendJsonResponse(res, 200, course)
+        console.log('-- reviews for this course: ', course.reviews)
+      })
+  } else {
+    sendJsonResponse(res, 404, {
+      'message': 'No courseid in request'
+    })
+  }
 }
 
 module.exports.coursesUpdateOne = (req, res) => {
