@@ -9,7 +9,81 @@ const sendJsonResponse = (res, status, content) => {
 }
 
 module.exports.reviewsCreate = (req, res) => {
-  sendJsonResponse(res, 200, {'status': 'stub'})
+  var courseid = req.params.courseid
+  if (courseid) {
+    Course
+      .findById(courseid)
+      .select('reviews')
+      .exec((err, course) => {
+        if (err) {
+          sendJsonResponse(res, 400, err)
+        } else {
+          doAddReview(req, res, course)
+        }
+      })
+  } else {
+    sendJsonResponse(res, 404, {
+      "message" : "Not found, courseid required"
+    })
+  }
+}
+
+const doAddReview = (req, res, course) => {
+  // provided with a parent document (course)
+  if (!course) {
+    sendJsonResponse(res, 404, {
+      "message" : "courseid not found"
+    })
+  } else {
+    // push data & save the parent document (course)
+    course.reviews.push({
+      author: req.body.author,
+      rating: req.body.rating,
+      rewiewText: req.body.reviewText
+    })
+    course.save((err, course) => {
+      var thisReview
+      if (err) {
+        sendJsonResponse(res, 400, err)
+      } else {
+        updateAverageRating(course._id)
+        // Retrieve last review added to array & return it as confirmation
+        thisReview = course.reviews[course.reviews.length - 1]
+        sendJsonResponse(res, 201, thisReview)
+      }
+    })
+  }
+}
+
+const updateAverageRating = (courseid) => {
+  Course
+    .findById(courseid)
+    .select('rating reviews')
+    .exec((err, course) => {
+      if (!err) {
+        doSetAverageRating(course)
+      }
+    })
+}
+
+const doSetAverageRating = (course) => {
+  var i, reviewCount, ratingAverage, ratingTotal
+  if (course.reviews && course.reviews.length > 0) {
+    reviewCount = course.reviews.length
+    ratingTotal = 0
+    for (i = 0; i < reviewCount; i++) {
+      ratingTotal = ratingTotal + course.reviews[i].rating
+    }
+    ratingAverage = parseInt(ratingTotal / reviewCount, 10)
+    course.rating = ratingAverage
+    course.save((err) => {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log('Average rating updated to', ratingAverage)
+      }
+    })
+  }
 }
 
 /* GET a review from a course by the id */
@@ -61,6 +135,7 @@ module.exports.reviewsReadOne = (req, res) => {
     })
   }
 }
+
 
 module.exports.reviewsUpdateOne = (req, res) => {
   sendJsonResponse(res, 200, {'status': 'stub'})
