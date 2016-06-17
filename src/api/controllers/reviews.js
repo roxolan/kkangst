@@ -186,5 +186,48 @@ module.exports.reviewsUpdateOne = (req, res) => {
 }
 
 module.exports.reviewsDeleteOne = (req, res) => {
-  sendJsonResponse(res, 200, {'status': 'stub'})
+  if (!req.params.courseid || !req.params.reviewid) {
+    sendJsonResponse(res, 404, {
+      'message': 'Not found, courseid & reviewid are both required'
+    })
+    return
+  }
+  Course
+    .findById(req.params.courseid)
+    .select('reviews')
+    .exec((err, course) => {
+      var thisReview
+      if (!course) {
+        sendJsonResponse(res, 404, {
+          'message': 'courseid not found'
+        })
+        return
+      } else if (err) {
+        sendJsonResponse(res, 400, err)
+        return
+      }
+      if (course.reviews && course.reviews.length > 0) {
+        // find subdocument:
+        thisReview = course.reviews.id(req.params.reviewid)
+        if (!thisReview) {
+          sendJsonResponse(res, 404, {
+            'message': 'reviewid not found'
+          })
+        } else {
+          course.reviews.id(req.params.reviewid).remove()
+          course.save((err, course) => {
+            if (err) {
+              sendJsonResponse(res, 404, err)
+            } else {
+              updateAverageRating(course._id)
+              sendJsonResponse(res, 200, null)
+            }
+          })
+        }
+      } else {
+        sendJsonResponse(res, 404, {
+          'message': 'No review to update'
+        })
+      }
+    })
 }
