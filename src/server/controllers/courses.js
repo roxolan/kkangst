@@ -1,5 +1,12 @@
 const request = require('request')
 
+var apiOptions = {
+  server: 'http://localhost:3000'
+}
+if (process.env.NODE_ENV === 'production') {
+  apiOptions.server = 'https://kkangst.herokuapp.com'
+}
+
 module.exports.homelist = (req, res) => {
   res.render('courses-list', {
     title: 'Перелік курсів',
