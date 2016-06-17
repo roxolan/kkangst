@@ -1,3 +1,5 @@
+const request = require('request')
+
 module.exports.homelist = (req, res) => {
   res.render('courses-list', {
     title: 'Перелік курсів',
