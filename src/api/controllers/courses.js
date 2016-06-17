@@ -150,5 +150,20 @@ module.exports.coursesUpdateOne = (req, res) => {
 }
 
 module.exports.coursesDeleteOne = (req, res) => {
-  sendJsonResponse(res, 200, {'status': 'stub'})
+  const courseid = req.params.courseid
+  if (courseid) {
+    Course
+      .findByIdAndRemove(courseid)
+      .exec((err, course) => {
+        if (err) {
+          sendJsonResponse(res, 404, err)
+          return
+        }
+        sendJsonResponse(res, 204, null)
+      })
+  } else {
+    sendJsonResponse(res, 404, {
+      'message': 'No courseid'
+    })
+  }
 }
