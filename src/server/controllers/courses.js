@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'production') {
   apiOptions.server = 'https://kkangst.herokuapp.com'
 }
 
-module.exports.homelist = (req, res) => {
+const renderHomepage = (req, res) => {
   res.render('courses-list', {
     title: 'Перелік курсів',
     pageHeader: {
@@ -35,6 +35,10 @@ module.exports.homelist = (req, res) => {
       distance: '250m'
     }]
   })
+}
+
+module.exports.homelist = (req, res) => {
+  renderHomepage(req, res)
 }
 
 module.exports.courseInfo = (req, res) => {
