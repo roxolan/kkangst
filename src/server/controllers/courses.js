@@ -8,6 +8,15 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const renderHomepage = (req, res, responseBody) => {
+  var message
+  if (!(responseBody instanceof Array)) {
+    message = 'API lookup error'
+    responseBody = []
+  } else {
+    if (!responseBody.length) {
+      message = 'No corresponding courses found'
+    }
+  }
   res.render('courses-list', {
     title: 'Перелік курсів',
     pageHeader: {
@@ -15,7 +24,8 @@ const renderHomepage = (req, res, responseBody) => {
       strapline: 'Оберіть курси, які вам потрібні'
     },
     sidebar: 'Цей сервіс допоможе вам обрати потрібні шляхи навчання і самостійного вдосконалення',
-    courses: responseBody
+    courses: responseBody,
+    message: message
   })
 }
 
