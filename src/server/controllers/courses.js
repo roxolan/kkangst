@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'production') {
   apiOptions.server = 'https://kkangst.herokuapp.com'
 }
 
-const renderHomepage = (req, res) => {
+const renderHomepage = (req, res, responseBody) => {
   res.render('courses-list', {
     title: 'Перелік курсів',
     pageHeader: {
@@ -15,30 +15,22 @@ const renderHomepage = (req, res) => {
       strapline: 'Оберіть курси, які вам потрібні'
     },
     sidebar: 'Цей сервіс допоможе вам обрати потрібні шляхи навчання і самостійного вдосконалення',
-    courses: [{
-      name: 'Стратегічна ідея',
-      address: 'Київ, вул. Волоська, 8/5, корп.4',
-      rating: 5,
-      groups: ['PMBA', 'EMBA', 'EMBA(Agro)'],
-      distance: '250m'
-    }, {
-      name: 'Маркетинг',
-      address: 'Київ, вул. Волоська, 8/5, корп.4',
-      rating: 4,
-      groups: ['PMBA', 'EMBA', 'EMBA(Agro)'],
-      distance: '250m'
-    }, {
-      name: 'Управління якістю',
-      address: 'Київ, вул. Волоська, 8/5, корп.4',
-      rating: 3,
-      groups: ['PMBA', 'EMBA', 'EMBA(Agro)'],
-      distance: '250m'
-    }]
+    courses: responseBody
   })
 }
 
 module.exports.homelist = (req, res) => {
-  renderHomepage(req, res)
+  var requestOptions
+  var path = '/api/courses'
+  requestOptions = {
+    url: apiOptions.server + path,
+    method: 'GET',
+    json: {},
+    qs: {}
+  }
+  request(requestOptions, function(err, response, body) {
+    renderHomepage(req, res, body)
+  })
 }
 
 module.exports.courseInfo = (req, res) => {
