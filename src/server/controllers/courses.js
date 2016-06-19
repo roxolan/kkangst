@@ -43,7 +43,7 @@ module.exports.homelist = (req, res) => {
   })
 }
 
-module.exports.courseInfo = (req, res) => {
+const renderDetailPage = (req, res) => {
   res.render('course-info', {
     title: 'Інформація про курс',
     pageHeader: {
@@ -87,6 +87,11 @@ module.exports.courseInfo = (req, res) => {
       }]
     }
   })
+}
+
+module.exports.courseInfo = (req, res) => {
+  console.log(req.params.courseid)
+  renderDetailPage(req, res)
 }
 
 module.exports.addReview = (req, res) => {
