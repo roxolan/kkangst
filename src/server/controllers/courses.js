@@ -118,4 +118,26 @@ module.exports.addReview = (req, res) => {
 }
 
 /* POST 'Add review' page */
-module.exports.doAddReview = (req, res) => {}
+module.exports.doAddReview = (req, res) => {
+  var requestOptions, path, postdata
+  var courseid = req.params.courseid
+  path = '/api/courses/' + courseid + '/reviews'
+  postdata = {
+    author: req.body.name,
+    rating: parseInt(req.body.rating, 10),
+    reviewText: req.body.review
+  }
+  requestOptions = {
+    url: apiOptions.server + path,
+    method: 'POST',
+    json: postdata
+  }
+  request(requestOptions, (err, response, body) => {
+    if (response.statusCode === 201) {
+      console.log('created review with postdata: ' + postdata)
+      res.redirect('/course/' + courseid)
+    } else {
+      _showError(req, res, response.statusCode)
+    }
+  })
+}
