@@ -29,6 +29,25 @@ const renderHomepage = (req, res, responseBody) => {
   })
 }
 
+const _showError = (req, res, status) => {
+  var title, content
+  if (status === 400) {
+    title = '404, page not found'
+    content = 'Пробачте, не можемо знайти сторінку'
+  } else if (status === 500) {
+    title = '505, internal server error'
+    content = 'Нам шкода, але, схоже, маємо проблеми з нашим сервером'
+  } else {
+    title = status + ', something went wrong'
+    content = 'Щось десь пішло не так'
+  }
+  res.status = status
+  res.render('generic-text', {
+    title: title,
+    content: content
+  })
+}
+
 module.exports.homelist = (req, res) => {
   var requestOptions
   var path = '/api/courses'
@@ -38,60 +57,48 @@ module.exports.homelist = (req, res) => {
     json: {},
     qs: {}
   }
-  request(requestOptions, function(err, response, body) {
+  request(requestOptions, function (err, response, body) {
     renderHomepage(req, res, body)
   })
 }
 
-const renderDetailPage = (req, res) => {
+const getCourseInfo = (req, res, callback) => {
+  var requestOptions
+  var path = '/api/courses/' + req.params.courseid
+  requestOptions = {
+    url: apiOptions.server + path,
+    method: 'GET',
+    json: {}
+  }
+  request(requestOptions, (err, response, body) => {
+    var data = body
+    if (response.statusCode === 200) {
+      callback(req, res, data)
+    } else {
+      _showError(req, res, response.statusCode)
+    }
+  })
+}
+
+const renderCoursePage = (req, res, courseDetail) => {
   res.render('course-info', {
-    title: 'Інформація про курс',
+    title: courseDetail.name,
     pageHeader: {
-      title: 'Стратегічна ідея'
+      title: courseDetail.name
     },
     sidebar: {
       context: ' - курс, що є фундаментальним для цілої програми навчання в Школі',
       callToAction: 'Якщо ви пройшли цей курс і маєте що сказати - прохання залишити коментар'
     },
-    course: {
-      name: 'Стратегічна ідея',
-      address: 'Київ, вул. Волоська, 8/5, корп.4',
-      rating: 5,
-      groups: ['PMBA', 'EMBA', 'EMBA(Agro)'],
-      classTimes: [{
-        day: 'Вівторок',
-        date: '7 червня 2016',
-        timing: '10:00-13:15',
-        room: 'ауд. 410'
-      }, {
-        day: 'П\'ятниця',
-        date: '10 червня 2016',
-        timing: '15:00-18:15',
-        room: 'ауд. 410'
-      }, {
-        day: 'Понеділок',
-        date: '13 червня 2016',
-        timing: '10:00-13:15',
-        room: 'ауд. 410'
-      }],
-      reviews: [{
-        author: 'Віктор Оксенюк',
-        rating: 4,
-        timestamp: '13 червня 2016',
-        reviewText: 'Прохання викласти матеріали в LMS'
-      }, {
-        author: 'Михайло Травецький',
-        rating: 5,
-        timestamp: '14 червня 2016',
-        reviewText: 'Що порадите почитати в розвиток? Де можна дістати переклад Пітера Сенге?'
-      }]
-    }
+    course: courseDetail
   })
 }
 
+/* GET 'Course info' page */
 module.exports.courseInfo = (req, res) => {
-  console.log(req.params.courseid)
-  renderDetailPage(req, res)
+  getCourseInfo(req, res, (req, res, responseData) => {
+    renderCoursePage(req, res, responseData)
+  })
 }
 
 module.exports.addReview = (req, res) => {
