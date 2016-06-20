@@ -39,7 +39,7 @@ const doAddReview = (req, res, course) => {
     course.reviews.push({
       author: req.body.author,
       rating: req.body.rating,
-      rewiewText: req.body.reviewText
+      reviewText: req.body.reviewText
     })
     course.save((err, course) => {
       var thisReview
