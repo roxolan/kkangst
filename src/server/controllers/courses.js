@@ -101,6 +101,7 @@ module.exports.courseInfo = (req, res) => {
   })
 }
 
+/* GET 'Add review' page */
 module.exports.addReview = (req, res) => {
   res.render('course-review-form', {
     title: 'Додати примітку',
@@ -109,3 +110,6 @@ module.exports.addReview = (req, res) => {
     }
   })
 }
+
+/* POST 'Add review' page */
+module.exports.doAddReview = (req, res) => {}

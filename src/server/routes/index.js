@@ -5,7 +5,8 @@ const ctrlOthers = require('../controllers/others')
 
 router.get('/', ctrlCourses.homelist)
 router.get('/course/:courseid', ctrlCourses.courseInfo)
-router.get('/course/review/new', ctrlCourses.addReview)
+router.get('/course/:courseid/review/new', ctrlCourses.addReview)
+router.post('/course/:courseid/review/new', ctrlCourses.doAddReview)
 
 router.get('/about', ctrlOthers.about)
 
