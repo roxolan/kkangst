@@ -31,7 +31,7 @@ const renderHomepage = (req, res, responseBody) => {
 
 const _showError = (req, res, status) => {
   var title, content
-  if (status === 400) {
+  if (status === 404) {
     title = '404, page not found'
     content = 'Пробачте, не можемо знайти сторінку'
   } else if (status === 500) {
@@ -57,7 +57,7 @@ module.exports.homelist = (req, res) => {
     json: {},
     qs: {}
   }
-  request(requestOptions, function (err, response, body) {
+  request(requestOptions, (err, response, body) => {
     renderHomepage(req, res, body)
   })
 }
