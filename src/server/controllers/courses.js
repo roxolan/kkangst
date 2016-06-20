@@ -101,18 +101,20 @@ module.exports.courseInfo = (req, res) => {
   })
 }
 
-const renderReviewForm = (req, res) => {
+const renderReviewForm = (req, res, courseDetail) => {
   res.render('course-review-form', {
-    title: 'Додати примітку',
+    title: 'Примітка до курсу: ' + courseDetail.name,
     pageHeader: {
-      title: 'Коментар на курс: Стратегічна ідея'
+      title: 'Коментар на курс: ' + courseDetail.name
     }
   })
 }
 
 /* GET 'Add review' page */
 module.exports.addReview = (req, res) => {
-  renderReviewForm(req, res)
+  getCourseInfo(req, res, (req, res, responseData) => {
+    renderReviewForm(req, res, responseData)
+  })
 }
 
 /* POST 'Add review' page */
