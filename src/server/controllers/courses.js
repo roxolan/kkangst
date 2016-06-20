@@ -101,14 +101,18 @@ module.exports.courseInfo = (req, res) => {
   })
 }
 
-/* GET 'Add review' page */
-module.exports.addReview = (req, res) => {
+const renderReviewForm = (req, res) => {
   res.render('course-review-form', {
     title: 'Додати примітку',
     pageHeader: {
       title: 'Коментар на курс: Стратегічна ідея'
     }
   })
+}
+
+/* GET 'Add review' page */
+module.exports.addReview = (req, res) => {
+  renderReviewForm(req, res)
 }
 
 /* POST 'Add review' page */
