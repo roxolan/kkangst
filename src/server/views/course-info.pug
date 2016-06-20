@@ -38,7 +38,7 @@ block content
         .col-xs-12
           .panel.panel-primary.review-panel
             .panel-heading
-              a.btn.btn-default.pull-right(href='/course/review/new') Додати коментар
+              a.btn.btn-default.pull-right(href=`/course/${course._id}/review/new`) Додати коментар
               h2.panel-title Коментарі
             .panel-body.review-container
               each review in course.reviews
