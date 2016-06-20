@@ -41,7 +41,7 @@ const _showError = (req, res, status) => {
     title = status + ', something went wrong'
     content = 'Щось десь пішло не так'
   }
-  res.status = status
+  res.status(status)
   res.render('generic-text', {
     title: title,
     content: content
