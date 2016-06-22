@@ -4,15 +4,13 @@ const plumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
 const uglify = require('gulp-uglify')
 
-
 const config = require('./gulp-config.json')
-
 
 gulp.task('js-app-concat', [ 'clean' ], () => {
   return gulp.src(config.paths.appjs)
     .pipe(plumber())
     .pipe(sourcemaps.init())
-      .pipe(concat('app.js'))
+    .pipe(concat('app.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.paths.publicjs))
 })
