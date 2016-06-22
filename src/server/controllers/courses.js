@@ -138,7 +138,7 @@ module.exports.doAddReview = (req, res) => {
       console.log('created review with postdata: ' + postdata)
       res.redirect('/course/' + courseid)
     } else if (response.statusCode === 400 && body.name && body.name === 'ValidationError') {
-      res.redirect('/course/' + courseid + '/reviews/new?err=val')
+      res.redirect('/course/' + courseid + '/review/new?err=val')
     } else {
       console.log(body)
       _showError(req, res, response.statusCode)
