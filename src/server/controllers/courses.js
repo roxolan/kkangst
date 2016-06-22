@@ -133,15 +133,19 @@ module.exports.doAddReview = (req, res) => {
     method: 'POST',
     json: postdata
   }
-  request(requestOptions, (err, response, body) => {
-    if (response.statusCode === 201) {
-      console.log('created review with postdata: ' + postdata)
-      res.redirect('/course/' + courseid)
-    } else if (response.statusCode === 400 && body.name && body.name === 'ValidationError') {
-      res.redirect('/course/' + courseid + '/review/new?err=val')
-    } else {
-      console.log(body)
-      _showError(req, res, response.statusCode)
-    }
-  })
+  if (!postdata.author || !postdata.rating || !postdata.reviewText) {
+    res.redirect('/course/' + courseid + '/review/new?err=val')
+  } else {
+    request(requestOptions, (err, response, body) => {
+      if (response.statusCode === 201) {
+        console.log('created review with postdata: ' + postdata)
+        res.redirect('/course/' + courseid)
+      } else if (response.statusCode === 400 && body.name && body.name === 'ValidationError') {
+        res.redirect('/course/' + courseid + '/review/new?err=val')
+      } else {
+        console.log(body)
+        _showError(req, res, response.statusCode)
+      }
+    })
+  }
 }
