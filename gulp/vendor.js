@@ -2,6 +2,8 @@ const gulp = require('gulp')
 const gutil = require('gulp-util')
 const path = require('path')
 
+const config = require('./gulp-config.json')
+
 gulp.task('bootstrap-copy', [ 'clean' ], () => {
   return gulp.src('node_modules/bootstrap/dist/**/*')
     .pipe(gulp.dest(path.join(__dirname, '..', 'public', 'bootstrap')))
@@ -18,7 +20,7 @@ gulp.task('jquery-copy', [ 'clean' ], () => {
 })
 
 gulp.task('angular-copy', [ 'clean' ], () => {
-  return gulp.src('node_modules/angular/angular.js')
+  return gulp.src(config.paths.angularlibs)
     .pipe(gulp.dest(path.join(__dirname, '..', 'public', 'js', 'vendor', 'angular')))
 })
 

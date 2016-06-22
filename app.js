@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use(express.static(path.join(__dirname, 'public')))
-app.use('/assets', express.static(path.join(__dirname, './node_modules')))
+// app.use('/assets', express.static(path.join(__dirname, './node_modules')))
 
 app.use('/', routes)
 app.use('/api', routesApi)
