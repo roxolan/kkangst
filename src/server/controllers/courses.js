@@ -106,7 +106,8 @@ const renderReviewForm = (req, res, courseDetail) => {
     title: 'Примітка до курсу: ' + courseDetail.name,
     pageHeader: {
       title: 'Коментар на курс: ' + courseDetail.name
-    }
+    },
+    error: req.query.err
   })
 }
 
