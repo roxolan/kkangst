@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app="kkangst")
   head
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title= title
@@ -22,13 +22,18 @@ html
     .container
       block content
 
-      footer
+      footer(ng-controller="MainCtrl")
         .row
           .col-xs-12
-            small &copy; Viktor Kotusenko 2016
+            small &copy; | {{ vm.author }} {{ vm.year }}
 
 
     script(src='/js/vendor/angular/angular.js')
+    script(src='/js/vendor/angular/angular-route.js')
+    script(src='/js/vendor/angular/angular-resource.js')
+    script(src='/js/vendor/angular/angular-sanitize.js')
+    script(src='/js/vendor/angular/angular-touch.js')
+    script(src='/js/vendor/angular/angular-ui-router.js')
     script(src='/js/vendor/jquery/jquery.js')
     script(src='/bootstrap/js/bootstrap.js')
     script(src='/js/app.js')
