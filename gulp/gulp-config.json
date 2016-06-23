@@ -21,8 +21,6 @@
     ],
     "appjs": [
       "src/client/app/app.js",
-      "src/client/app/main.js",
-      "src/client/app/config.router.js",
       "src/client/app/validation.js"
     ],
     "vendorjs": [
