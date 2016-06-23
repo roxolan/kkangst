@@ -7,25 +7,14 @@ if (process.env.NODE_ENV === 'production') {
   apiOptions.server = 'https://kkangst.herokuapp.com'
 }
 
-const renderHomepage = (req, res, responseBody) => {
-  var message
-  if (!(responseBody instanceof Array)) {
-    message = 'API lookup error'
-    responseBody = []
-  } else {
-    if (!responseBody.length) {
-      message = 'No corresponding courses found'
-    }
-  }
+const renderHomepage = (req, res) => {
   res.render('courses-list', {
     title: 'Перелік курсів',
     pageHeader: {
       title: 'LMS',
       strapline: 'Оберіть курси, які вам потрібні'
     },
-    sidebar: 'Цей сервіс допоможе вам обрати потрібні шляхи навчання і самостійного вдосконалення',
-    courses: responseBody,
-    message: message
+    sidebar: 'Цей сервіс допоможе вам обрати потрібні шляхи навчання і самостійного вдосконалення'
   })
 }
 
@@ -49,17 +38,7 @@ const _showError = (req, res, status) => {
 }
 
 module.exports.homelist = (req, res) => {
-  var requestOptions
-  var path = '/api/courses'
-  requestOptions = {
-    url: apiOptions.server + path,
-    method: 'GET',
-    json: {},
-    qs: {}
-  }
-  request(requestOptions, (err, response, body) => {
-    renderHomepage(req, res, body)
-  })
+  renderHomepage(req, res)
 }
 
 const getCourseInfo = (req, res, callback) => {
