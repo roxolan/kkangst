@@ -6,7 +6,7 @@ html(ng-app="kkangst")
     link(rel='stylesheet', href='/bootstrap/css/amelia.bootstrap.css')
     link(rel='stylesheet', href='/css/app.css')
 
-  body
+  body(ng-controller="mainCtrl as main")
     .navbar.navbar-default.navbar-fixed-top
       .container
         .navbar-header
@@ -25,7 +25,7 @@ html(ng-app="kkangst")
       footer
         .row
           .col-xs-12
-            small &copy; | {{ vm.author }} {{ vm.year }}
+            small &copy; | {{ main.author }} {{ main.year }}
 
 
     script(src='/js/vendor/angular/angular.js')
