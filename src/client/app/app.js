@@ -25,6 +25,15 @@ var formatDistance = function () {
   }
 }
 
+var ratingStars = function () {
+  return {
+    scope: {
+      thisRating: '=rating'
+    },
+    template: '{{ thisRating }}'
+  }
+}
+
 var mainCtrl = function () {
   var vm = this
   vm.author = 'Вітя Котусенко'
@@ -58,3 +67,4 @@ angular
   .controller('mainCtrl', mainCtrl)
   .controller('courseListCtrl', courseListCtrl)
   .filter('formatDistance', formatDistance)
+  .directive('ratingStars', ratingStars)

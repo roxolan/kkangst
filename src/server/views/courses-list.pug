@@ -16,7 +16,7 @@ block content
         .col-xs-12.list-group-item(ng-repeat="course in ctrl.courses")
           h4
             a(href=`/course/{{ course._id }}`) {{ course.name }}
-            small {{ course.rating }}
+            small(rating-stars, rating="course.rating")
             span.badge.pull-right.badge-default {{ course.distance | formatDistance }}
           p.address {{ course.address }}
           p
