@@ -10,20 +10,17 @@ block content
          small &nbsp;#{pageHeader.strapline}
 
   .row
-    .col-xs-12.col-sm-8
-      .error= message
+    .col-xs-12.col-sm-8(ng-controller="courseListCtrl as ctrl")
+      .error {{ message }}
       .row.list-group
-        each course in courses
-          .col-xs-12.list-group-item
-            h4
-              a(href=`/course/${course._id}`)= course.name
-              small &nbsp;
-                +outputRating(course.rating)
-              span.badge.pull-right.badge-default= course.distance
-            p.address= course.address
-            p
-              each group in course.groups
-                span.label.label-warning= group
-                | &nbsp;
+        .col-xs-12.list-group-item(ng-repeat="course in ctrl.courses")
+          h4
+            a(href=`/course/{{ course._id }}`) {{ course.name }}
+            small {{ course.rating }}
+            span.badge.pull-right.badge-default {{ course.distance }}
+          p.address {{ course.address }}
+          p
+            span.label.label-warning.label-group(ng-repeat="group in course.groups")
+              | {{ group }}
     .col-xs-12.col-sm-4
       p.lead= sidebar
