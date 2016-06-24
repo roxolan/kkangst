@@ -17,7 +17,7 @@ block content
           h4
             a(href=`/course/{{ course._id }}`) {{ course.name }}
             small {{ course.rating }}
-            span.badge.pull-right.badge-default {{ course.distance }}
+            span.badge.pull-right.badge-default {{ course.distance | formatDistance }}
           p.address {{ course.address }}
           p
             span.label.label-warning.label-group(ng-repeat="group in course.groups")
