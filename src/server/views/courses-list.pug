@@ -11,9 +11,11 @@ block content
 
   .row
     .col-xs-12.col-sm-8(ng-controller="courseListCtrl as ctrl")
+      label(for="filter") Filter results
+      input#filter(type="text", name="filter", ng-model="textFilter")
       .error {{ message }}
       .row.list-group
-        .col-xs-12.list-group-item(ng-repeat="course in ctrl.courses")
+        .col-xs-12.list-group-item(ng-repeat="course in ctrl.courses | filter : textFilter")
           h4
             a(href=`/course/{{ course._id }}`) {{ course.name }}
             small.rating-stars(rating-stars, rating="course.rating")
