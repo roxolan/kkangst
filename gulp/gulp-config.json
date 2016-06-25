@@ -37,6 +37,10 @@
     "appswig": [
       "src/client/app/**/*.html",
       "!**/_*.html"
+    ],
+    "apphtml": [
+      "src/client/html/**/*.html",
+      "!**/_*.html"
     ]
   }
 }
