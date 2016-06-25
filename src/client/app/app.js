@@ -30,7 +30,7 @@ var ratingStars = function () {
     scope: {
       thisRating: '=rating'
     },
-    template: '{{ thisRating }}'
+    templateUrl: '../html/templates/rating-stars.html'
   }
 }
 
