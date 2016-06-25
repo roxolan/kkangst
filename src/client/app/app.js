@@ -42,28 +42,17 @@ var mainCtrl = function () {
 
 var courseListCtrl = function (kkangstData) {
   var vm = this
-  vm.courses = kkangstData
+  kkangstData
+    .success(function (data) {
+      vm.courses = data
+    })
+    .error(function (e) {
+      console.log(e)
+    })
 }
 
-var kkangstData = function () {
-  return [
-    {
-      name: 'Маркетинг - другий рівень',
-      address: 'Київ, вул. Волоська, 8/5, корп.4',
-      rating: 3,
-      groups: ['PMBA', 'EMBA', 'EMBA(Agro)'],
-      distance: '0.296456',
-      _id: '5759719c216695a563a640e4'
-    },
-    {
-      name: 'Стратегічна ідея - продовження',
-      address: 'Київ, вул. Волоська, 8/5, корп.4',
-      rating: 4,
-      groups: ['PMBA', 'EMBA', 'EMBA(Agro)'],
-      distance: '0.78',
-      _id: '57612088a9bba3104346dc84'
-    }
-  ]
+var kkangstData = function ($http) {
+  return $http.get('/api/courses')
 }
 
 angular
