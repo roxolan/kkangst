@@ -42,11 +42,14 @@ var mainCtrl = function () {
 
 var courseListCtrl = function (kkangstData) {
   var vm = this
+  vm.message = 'Шукаємо курси...'
   kkangstData
     .success(function (data) {
+      vm.message = data.length > 0 ? '' : 'Курсів не знайдено'
       vm.courses = data
     })
     .error(function (e) {
+      vm.message = 'Вибачте, щось пішло не так'
       console.log(e)
     })
 }
