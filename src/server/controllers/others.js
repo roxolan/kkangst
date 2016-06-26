@@ -4,3 +4,7 @@ module.exports.about = (req, res) => {
     content: 'LMS було створено для підтримки процесу навчання в kmbs. \n\nЦя система містить усе потрібне для організації навчання'
   })
 }
+
+module.exports.angularApp = (req, res) => {
+  res.render('layout', { title: 'LMS' })
+}
