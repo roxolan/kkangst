@@ -1,7 +1,13 @@
 // brand new angular app
 'use strict'
 
-angular.module('kkangst', [])
+angular.module('kkangst', ['ngRoute'])
+
+function config ($routeProvider) {
+  $routeProvider
+    .when('/', {})
+    .otherwise({redirectTo: '/'})
+}
 
 var _isNumeric = function (n) {
   return !isNaN(parseFloat(n)) && isFinite(n)
@@ -60,8 +66,6 @@ var kkangstData = function ($http) {
 
 angular
   .module('kkangst')
+  .config(['$routeProvider', config])
   .controller('mainCtrl', mainCtrl)
   .controller('courseListCtrl', courseListCtrl)
-  .filter('formatDistance', formatDistance)
-  .directive('ratingStars', ratingStars)
-  .service('kkangstData', kkangstData)
