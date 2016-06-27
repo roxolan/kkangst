@@ -3,7 +3,7 @@
 
 angular.module('kkangst', ['ngRoute'])
 
-function config ($routeProvider) {
+function config ($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
       templateUrl: '../html/home/home.view.html',
@@ -11,6 +11,7 @@ function config ($routeProvider) {
       controllerAs: 'vm'
     })
     .otherwise({redirectTo: '/'})
+  $locationProvider.html5Mode(true)
 }
 
 var _isNumeric = function (n) {
@@ -50,26 +51,7 @@ var mainCtrl = function () {
   vm.year = 1974
 }
 
-var courseListCtrl = function (kkangstData) {
-  var vm = this
-  vm.message = 'Шукаємо курси...'
-  kkangstData
-    .success(function (data) {
-      vm.message = data.length > 0 ? '' : 'Курсів не знайдено'
-      vm.courses = data
-    })
-    .error(function (e) {
-      vm.message = 'Вибачте, щось пішло не так'
-      console.log(e)
-    })
-}
-
-var kkangstData = function ($http) {
-  return $http.get('/api/courses')
-}
-
 angular
   .module('kkangst')
-  .config(['$routeProvider', config])
+  .config(['$routeProvider', '$locationProvider', config])
   .controller('mainCtrl', mainCtrl)
-  .controller('courseListCtrl', courseListCtrl)
