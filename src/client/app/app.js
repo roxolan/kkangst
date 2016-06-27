@@ -5,7 +5,9 @@ angular.module('kkangst', ['ngRoute'])
 
 function config ($routeProvider) {
   $routeProvider
-    .when('/', {})
+    .when('/', {
+      templateUrl: '../html/home/home.view.html'
+    })
     .otherwise({redirectTo: '/'})
 }
 
