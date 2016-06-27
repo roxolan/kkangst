@@ -1,0 +1,40 @@
+<div ng-controller="homeCtrl as vm">
+  <div id="banner" class="page-header">
+    <div class="row">
+      <div class="col-lg-6"></div>
+        <h1>{{ vm.pageHeader.title }}
+          <small>{{ vm.pageHeader.strapline }}</small>
+        </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-8">
+      <label for="filter">Filter results</label>
+      <input id="filter" type="text", name="filter", ng-model="textFilter">
+      <div class="error">{{ vm.message }}</div>
+      <div class="row list-group">
+        <div class="col-xs-12 list-group-item" ng-repeat="course in vm.data.courses | filter : textFilter">
+          <h4>
+            <a href="/#/course/{{ course._id }}">{{ course.name }}</a>
+            <small class="rating-stars" rating-stars rating="course.rating"></small>
+            <span class="badge pull-right badge-default">{{ course.distance }}</span>
+          </h4>
+          <p class="address">{{ course.address }}</p>
+          <p>
+            <span class="label label-warning label-facility" ng-repeat="group in course.groups">
+              {{ group }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <p class="lead">{{ vm.sidebar.content }}</p>
+    </div>
+  </div>
+</div>
+
+
+
+

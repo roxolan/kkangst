@@ -21,7 +21,8 @@
     ],
     "appjs": [
       "src/client/app/app.js",
-      "src/client/app/validation.js"
+      "src/client/app/validation.js",
+      "src/client/html/home/home.controller.js"
     ],
     "vendorjs": [
       "node_modules/bootstrap/dist/js/bootstrap.js"
