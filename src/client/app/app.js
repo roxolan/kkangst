@@ -1,6 +1,3 @@
-// brand new angular app
-'use strict'
-
 angular.module('kkangst', ['ngRoute'])
 
 function config ($routeProvider, $locationProvider) {
