@@ -17,7 +17,7 @@
         <h4>
           <a href="/course/{{ course._id }}">{{ course.name }}</a>
           <small class="rating-stars" rating-stars rating="course.rating"></small>
-          <span class="badge pull-right badge-default">{{ course.distance }}</span>
+          <span class="badge pull-right badge-default">{{ course.distance | formatDistance }}</span>
         </h4>
         <p class="address">{{ course.address }}</p>
         <p>
