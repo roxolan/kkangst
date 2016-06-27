@@ -24,7 +24,8 @@
       "src/client/app/validation.js",
       "src/client/html/home/home.controller.js",
       "src/client/app/common/services/kkangstData.service.js",
-      "src/client/app/common/filters/formatDistance.filter.js"
+      "src/client/app/common/filters/formatDistance.filter.js",
+      "src/client/html/directives/ratingStars/ratingStars.directive.js"
     ],
     "vendorjs": [
       "node_modules/bootstrap/dist/js/bootstrap.js"
