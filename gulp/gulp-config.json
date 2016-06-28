@@ -27,6 +27,7 @@
       "src/client/app/about/about.controller.js",
       "src/client/app/validation.js",
       "src/client/html/home/home.controller.js",
+      "src/client/html/courseDetail/courseDetail.controller.js",
       "src/client/html/directives/ratingStars/ratingStars.directive.js",
       "src/client/html/directives/footerGeneric/footerGeneric.directive.js",
       "src/client/html/directives/navigation/navigation.directive.js",
