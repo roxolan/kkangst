@@ -2,12 +2,19 @@ angular
   .module('kkangst')
   .controller('courseDetailCtrl', courseDetailCtrl)
 
-courseDetailCtrl.$inject = ['$routeParams']
-function courseDetailCtrl ($routeParams) {
+courseDetailCtrl.$inject = ['$routeParams', 'kkangstData']
+function courseDetailCtrl ($routeParams, kkangstData) {
   var vm = this
   vm.courseid = $routeParams.courseid
 
-  vm.pageHeader = {
-    title: vm.courseid
-  }
+  kkangstData.courseById(vm.courseid)
+    .success(function (data) {
+      vm.data = { course: data }
+      vm.pageHeader = {
+        title: vm.data.course.name
+      }
+    })
+    .error(function (e) {
+      console.log(e)
+    })
 }
