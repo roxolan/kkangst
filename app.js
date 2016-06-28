@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 require('./src/api/models/db')
 
-const routes = require('./src/server/routes/index')
+// const routes = require('./src/server/routes/index')
 const routesApi = require('./src/api/routes/index')
 
 const app = express()
@@ -23,13 +23,13 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')))
 // app.use('/assets', express.static(path.join(__dirname, './node_modules')))
 
-app.use('/', routes)
+// app.use('/', routes)
 app.use('/api', routesApi)
 
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'))
+})
 /*
- app.use((req, res) => {
- res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'))
- })
  app.use('/users', users)
  */
 
