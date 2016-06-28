@@ -4,7 +4,16 @@ angular
 
 kkangstData.$inject = ['$http']
 function kkangstData ($http) {
-  this.getCourses = function () {
+  var getCourses = function () {
     return $http.get('/api/courses')
+  }
+
+  var courseById = function (courseid) {
+    return $http.get('/api/courses/' + courseid)
+  }
+
+  return {
+    getCourses: getCourses,
+    courseById: courseById
   }
 }
