@@ -27,6 +27,7 @@
       "src/client/html/directives/ratingStars/ratingStars.directive.js",
       "src/client/html/directives/footerGeneric/footerGeneric.directive.js",
       "src/client/html/directives/navigation/navigation.directive.js",
+      "src/client/html/directives/pageHeader/pageHeader.directive.js",
       "src/client/app/validation.js"
     ],
     "vendorjs": [
