@@ -12,6 +12,11 @@ function config ($routeProvider, $locationProvider) {
       controller: 'aboutCtrl',
       controllerAs: 'vm'
     })
+    .when('/course/:courseid', {
+      templateUrl: '../html/courseDetail/courseDetail.view.html',
+      controller: 'locationDetailCtrl',
+      controllerAs: 'vm'
+    })
     .otherwise({redirectTo: '/'})
   $locationProvider.html5Mode(true)
 }
