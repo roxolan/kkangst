@@ -2,10 +2,12 @@ angular
   .module('kkangst')
   .controller('courseDetailCtrl', courseDetailCtrl)
 
-function courseDetailCtrl () {
+courseDetailCtrl.$inject = ['$routeParams']
+function courseDetailCtrl ($routeParams) {
   var vm = this
+  vm.courseid = $routeParams.courseid
 
   vm.pageHeader = {
-    title: 'Course detail page'
+    title: vm.courseid
   }
 }

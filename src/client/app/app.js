@@ -14,7 +14,7 @@ function config ($routeProvider, $locationProvider) {
     })
     .when('/course/:courseid', {
       templateUrl: '../html/courseDetail/courseDetail.view.html',
-      controller: 'locationDetailCtrl',
+      controller: 'courseDetailCtrl',
       controllerAs: 'vm'
     })
     .otherwise({redirectTo: '/'})
