@@ -3,7 +3,6 @@ angular
   .directive('ratingStars', ratingStars)
 
 function ratingStars () {
-  console.log('ratingStars is called')
   return {
     restrict: 'EA',
     scope: {
