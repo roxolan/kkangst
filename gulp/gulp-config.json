@@ -22,13 +22,15 @@
     "appjs": [
       "src/client/app/app.js",
       "src/client/app/common/services/kkangstData.service.js",
-      "src/client/html/home/home.controller.js",
+      "src/client/app/common/filters/addHtmlLineBreaks.filter.js",
       "src/client/app/common/filters/formatDistance.filter.js",
+      "src/client/app/about/about.controller.js",
+      "src/client/app/validation.js",
+      "src/client/html/home/home.controller.js",
       "src/client/html/directives/ratingStars/ratingStars.directive.js",
       "src/client/html/directives/footerGeneric/footerGeneric.directive.js",
       "src/client/html/directives/navigation/navigation.directive.js",
-      "src/client/html/directives/pageHeader/pageHeader.directive.js",
-      "src/client/app/validation.js"
+      "src/client/html/directives/pageHeader/pageHeader.directive.js"
     ],
     "vendorjs": [
       "node_modules/bootstrap/dist/js/bootstrap.js"
