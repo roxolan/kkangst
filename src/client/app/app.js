@@ -7,6 +7,11 @@ function config ($routeProvider, $locationProvider) {
       controller: 'homeCtrl',
       controllerAs: 'vm'
     })
+    .when('/about', {
+      templateUrl: '../html/common/views/genericText.view.html',
+      controller: 'aboutCtrl',
+      controllerAs: 'vm'
+    })
     .otherwise({redirectTo: '/'})
   $locationProvider.html5Mode(true)
 }
