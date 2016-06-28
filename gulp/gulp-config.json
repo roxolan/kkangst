@@ -25,6 +25,7 @@
       "src/client/html/home/home.controller.js",
       "src/client/app/common/filters/formatDistance.filter.js",
       "src/client/html/directives/ratingStars/ratingStars.directive.js",
+      "src/client/html/directives/footerGeneric/footerGeneric.directive.js",
       "src/client/app/validation.js"
     ],
     "vendorjs": [
