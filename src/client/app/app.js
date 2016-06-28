@@ -1,4 +1,4 @@
-angular.module('kkangst', ['ngRoute'])
+angular.module('kkangst', ['ngRoute', 'ngSanitize'])
 
 function config ($routeProvider, $locationProvider) {
   $routeProvider
