@@ -2,8 +2,8 @@ angular
   .module('kkangst')
   .controller('courseDetailCtrl', courseDetailCtrl)
 
-courseDetailCtrl.$inject = ['$routeParams', 'kkangstData']
-function courseDetailCtrl ($routeParams, kkangstData) {
+courseDetailCtrl.$inject = ['$routeParams', '$modal', 'kkangstData']
+function courseDetailCtrl ($routeParams, $modal, kkangstData) {
   var vm = this
   vm.courseid = $routeParams.courseid
 
