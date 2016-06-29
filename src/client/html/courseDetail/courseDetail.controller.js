@@ -2,8 +2,8 @@ angular
   .module('kkangst')
   .controller('courseDetailCtrl', courseDetailCtrl)
 
-courseDetailCtrl.$inject = ['$routeParams', '$modal', 'kkangstData']
-function courseDetailCtrl ($routeParams, $modal, kkangstData) {
+courseDetailCtrl.$inject = ['$routeParams', '$uibModal', 'kkangstData']
+function courseDetailCtrl ($routeParams, $uibModal, kkangstData) {
   var vm = this
   vm.courseid = $routeParams.courseid
 
@@ -17,4 +17,8 @@ function courseDetailCtrl ($routeParams, $modal, kkangstData) {
     .error(function (e) {
       console.log(e)
     })
+
+  vm.popupReviewForm = function () {
+    alert("Let's add a review!")
+  }
 }
