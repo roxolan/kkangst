@@ -19,6 +19,9 @@ function courseDetailCtrl ($routeParams, $uibModal, kkangstData) {
     })
 
   vm.popupReviewForm = function () {
-    alert("Let's add a review!")
+    var modalInstance = $uibModal.open({
+      templateUrl: '../html/reviewModal/reviewModal.view.html',
+      controller: 'reviewModalCtrl as vm'
+    })
   }
 }
