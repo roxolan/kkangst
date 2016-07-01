@@ -1,5 +1,5 @@
 <div class="modal-content">
-  <form id="addReview" name="addReview" role="form" class="form-horizontal">
+  <form id="addReview" name="addReview" role="form" ng-submit="vm.onSubmit()" class="form-horizontal">
   <div class="modal-header">
     <button type="button" ng-click="vm.modal.cancel()" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
     <h4 id="myModalLabel" class="modal-title">Додайте ваш коментар до курсу {{ vm.courseData.courseName }}</h4>
