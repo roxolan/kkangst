@@ -31,5 +31,8 @@ function courseDetailCtrl ($routeParams, $uibModal, kkangstData) {
         }
       }
     })
+    modalInstance.result.then(function (data) {
+      vm.data.course.reviews.push(data)
+    })
   }
 }

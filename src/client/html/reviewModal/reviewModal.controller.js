@@ -3,7 +3,8 @@ angular
   .controller('reviewModalCtrl', reviewModalCtrl)
 
 reviewModalCtrl.$inject = ['$uibModalInstance', 'kkangstData', 'courseData']
-function reviewModalCtrl ($uibModalInstance, courseData) {
+
+function reviewModalCtrl ($uibModalInstance, kkangstData, courseData) {
   var vm = this
   vm.courseData = courseData
 
