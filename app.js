@@ -5,9 +5,12 @@ const favicon = require('serve-favicon')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-require('./src/api/models/db')
+const passport = require('passport')
 
-// const routes = require('./src/server/routes/index')
+require('./src/api/models/db')
+require('./src/api/config/passport')
+
+const routes = require('./src/server/routes/index')
 const routesApi = require('./src/api/routes/index')
 
 const app = express()
@@ -23,6 +26,8 @@ app.use(bodyParser.json())
 
 app.use(express.static(path.join(__dirname, 'public')))
 // app.use('/assets', express.static(path.join(__dirname, './node_modules')))
+
+app.use(passport.initialize)
 
 // app.use('/', routes)
 app.use('/api', routesApi)
