@@ -1,13 +1,97 @@
-// brand new angular app
-'use strict'
+;(function() {
+"use strict";
 
-angular.module('kkangst', [])
+angular.module('kkangst', ['ngRoute', 'ngSanitize', 'ui.bootstrap'])
+
+function config ($routeProvider, $locationProvider) {
+  $routeProvider
+    .when('/', {
+      templateUrl: '../html/home/home.view.html',
+      controller: 'homeCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/about', {
+      templateUrl: '../html/common/views/genericText.view.html',
+      controller: 'aboutCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/course/:courseid', {
+      templateUrl: '../html/courseDetail/courseDetail.view.html',
+      controller: 'courseDetailCtrl',
+      controllerAs: 'vm'
+    })
+    .otherwise({redirectTo: '/'})
+  $locationProvider.html5Mode(true)
+}
+
+var mainCtrl = function () {
+  var vm = this
+  vm.author = 'Вітя Котусенко'
+  vm.year = 1974
+}
+
+angular
+  .module('kkangst')
+  .config(['$routeProvider', '$locationProvider', config])
+  .controller('mainCtrl', mainCtrl)
+}());
+
+;(function() {
+"use strict";
+
+angular
+  .module('kkangst')
+  .service('kkangstData', kkangstData)
+
+kkangstData.$inject = ['$http']
+function kkangstData ($http) {
+  var getCourses = function () {
+    return $http.get('/api/courses')
+  }
+
+  var courseById = function (courseid) {
+    return $http.get('/api/courses/' + courseid)
+  }
+
+  var addReviewById = function (courseid, reviewData) {
+    return $http.post('/api/courses/' + courseid + '/reviews', reviewData)
+  }
+
+  return {
+    getCourses: getCourses,
+    courseById: courseById,
+    addReviewById: addReviewById
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+angular
+  .module('kkangst')
+  .filter('addHtmlLineBreaks', addHtmlLineBreaks)
+
+function addHtmlLineBreaks () {
+  return function (text) {
+    var output = text.replace(/\n/g, '<br/>')
+    return output
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+angular
+  .module('kkangst')
+  .filter('formatDistance', formatDistance)
 
 var _isNumeric = function (n) {
   return !isNaN(parseFloat(n)) && isFinite(n)
 }
 
-var formatDistance = function () {
+function formatDistance () {
   return function (distance) {
     var numDistance, unit
     if (distance && _isNumeric(distance)) {
@@ -24,50 +108,29 @@ var formatDistance = function () {
     }
   }
 }
+}());
 
-var ratingStars = function () {
-  return {
-    scope: {
-      thisRating: '=rating'
-    },
-    templateUrl: '../html/templates/rating-stars.html'
-  }
-}
-
-var mainCtrl = function () {
-  var vm = this
-  vm.author = 'Вітя Котусенко'
-  vm.year = 1974
-}
-
-var courseListCtrl = function () {
-  var vm = this
-  vm.courses = [
-    {
-      name: 'Маркетинг',
-      address: 'Київ, вул. Волоська, 8/5, корп.4',
-      rating: 4,
-      groups: ['PMBA', 'EMBA', 'EMBA(Agro)'],
-      distance: '0.296456',
-      _id: '5759719c216695a563a640e4'
-    },
-    {
-      name: 'Стратегічна ідея',
-      address: 'Київ, вул. Волоська, 8/5, корп.4',
-      rating: 5,
-      groups: ['PMBA', 'EMBA', 'EMBA(Agro)'],
-      distance: '0.78',
-      _id: '57612088a9bba3104346dc84'
-    }
-  ]
-}
+;(function() {
+"use strict";
 
 angular
   .module('kkangst')
-  .controller('mainCtrl', mainCtrl)
-  .controller('courseListCtrl', courseListCtrl)
-  .filter('formatDistance', formatDistance)
-  .directive('ratingStars', ratingStars)
+  .controller('aboutCtrl', aboutCtrl)
+
+function aboutCtrl () {
+  var vm = this
+
+  vm.pageHeader = {
+    title: 'Про LMS'
+  }
+  vm.main = {
+    content: 'LMS було створено для підтримки процесу навчання в kmbs. \n\nЦя система містить усе потрібне для організації навчання.'
+  }
+}
+}());
+
+;(function() {
+"use strict";
 
 $('#addReview').submit(function (e) {
   $('.alert.alert-danger').hide()
@@ -80,5 +143,199 @@ $('#addReview').submit(function (e) {
     return false
   }
 })
+}());
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5qcyIsInZhbGlkYXRpb24uanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQ3RFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJmaWxlIjoiYXBwLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gYnJhbmQgbmV3IGFuZ3VsYXIgYXBwXG4ndXNlIHN0cmljdCdcblxuYW5ndWxhci5tb2R1bGUoJ2trYW5nc3QnLCBbXSlcblxudmFyIF9pc051bWVyaWMgPSBmdW5jdGlvbiAobikge1xuICByZXR1cm4gIWlzTmFOKHBhcnNlRmxvYXQobikpICYmIGlzRmluaXRlKG4pXG59XG5cbnZhciBmb3JtYXREaXN0YW5jZSA9IGZ1bmN0aW9uICgpIHtcbiAgcmV0dXJuIGZ1bmN0aW9uIChkaXN0YW5jZSkge1xuICAgIHZhciBudW1EaXN0YW5jZSwgdW5pdFxuICAgIGlmIChkaXN0YW5jZSAmJiBfaXNOdW1lcmljKGRpc3RhbmNlKSkge1xuICAgICAgaWYgKGRpc3RhbmNlID4gMSkge1xuICAgICAgICBudW1EaXN0YW5jZSA9IHBhcnNlRmxvYXQoZGlzdGFuY2UpLnRvRml4ZWQoMSlcbiAgICAgICAgdW5pdCA9ICdrbSdcbiAgICAgIH0gZWxzZSB7XG4gICAgICAgIG51bURpc3RhbmNlID0gcGFyc2VJbnQoZGlzdGFuY2UgKiAxMDAwLCAxMClcbiAgICAgICAgdW5pdCA9ICdtJ1xuICAgICAgfVxuICAgICAgcmV0dXJuIG51bURpc3RhbmNlICsgdW5pdFxuICAgIH0gZWxzZSB7XG4gICAgICByZXR1cm4gJz8nXG4gICAgfVxuICB9XG59XG5cbnZhciByYXRpbmdTdGFycyA9IGZ1bmN0aW9uICgpIHtcbiAgcmV0dXJuIHtcbiAgICBzY29wZToge1xuICAgICAgdGhpc1JhdGluZzogJz1yYXRpbmcnXG4gICAgfSxcbiAgICB0ZW1wbGF0ZVVybDogJy4uL2h0bWwvdGVtcGxhdGVzL3JhdGluZy1zdGFycy5odG1sJ1xuICB9XG59XG5cbnZhciBtYWluQ3RybCA9IGZ1bmN0aW9uICgpIHtcbiAgdmFyIHZtID0gdGhpc1xuICB2bS5hdXRob3IgPSAn0JLRltGC0Y8g0JrQvtGC0YPRgdC10L3QutC+J1xuICB2bS55ZWFyID0gMTk3NFxufVxuXG52YXIgY291cnNlTGlzdEN0cmwgPSBmdW5jdGlvbiAoKSB7XG4gIHZhciB2bSA9IHRoaXNcbiAgdm0uY291cnNlcyA9IFtcbiAgICB7XG4gICAgICBuYW1lOiAn0JzQsNGA0LrQtdGC0LjQvdCzJyxcbiAgICAgIGFkZHJlc3M6ICfQmtC40ZfQsiwg0LLRg9C7LiDQktC+0LvQvtGB0YzQutCwLCA4LzUsINC60L7RgNC/LjQnLFxuICAgICAgcmF0aW5nOiA0LFxuICAgICAgZ3JvdXBzOiBbJ1BNQkEnLCAnRU1CQScsICdFTUJBKEFncm8pJ10sXG4gICAgICBkaXN0YW5jZTogJzAuMjk2NDU2JyxcbiAgICAgIF9pZDogJzU3NTk3MTljMjE2Njk1YTU2M2E2NDBlNCdcbiAgICB9LFxuICAgIHtcbiAgICAgIG5hbWU6ICfQodGC0YDQsNGC0LXQs9GW0YfQvdCwINGW0LTQtdGPJyxcbiAgICAgIGFkZHJlc3M6ICfQmtC40ZfQsiwg0LLRg9C7LiDQktC+0LvQvtGB0YzQutCwLCA4LzUsINC60L7RgNC/LjQnLFxuICAgICAgcmF0aW5nOiA1LFxuICAgICAgZ3JvdXBzOiBbJ1BNQkEnLCAnRU1CQScsICdFTUJBKEFncm8pJ10sXG4gICAgICBkaXN0YW5jZTogJzAuNzgnLFxuICAgICAgX2lkOiAnNTc2MTIwODhhOWJiYTMxMDQzNDZkYzg0J1xuICAgIH1cbiAgXVxufVxuXG5hbmd1bGFyXG4gIC5tb2R1bGUoJ2trYW5nc3QnKVxuICAuY29udHJvbGxlcignbWFpbkN0cmwnLCBtYWluQ3RybClcbiAgLmNvbnRyb2xsZXIoJ2NvdXJzZUxpc3RDdHJsJywgY291cnNlTGlzdEN0cmwpXG4gIC5maWx0ZXIoJ2Zvcm1hdERpc3RhbmNlJywgZm9ybWF0RGlzdGFuY2UpXG4gIC5kaXJlY3RpdmUoJ3JhdGluZ1N0YXJzJywgcmF0aW5nU3RhcnMpXG4iLCIkKCcjYWRkUmV2aWV3Jykuc3VibWl0KGZ1bmN0aW9uIChlKSB7XG4gICQoJy5hbGVydC5hbGVydC1kYW5nZXInKS5oaWRlKClcbiAgaWYgKCEkKCdpbnB1dCNuYW1lJykudmFsKCkgfHwgISQoJ3NlbGVjdCNyYXRpbmcnKS52YWwoKSB8fCAhJCgndGV4dGFyZWEjcmV2aWV3JykudmFsKCkpIHtcbiAgICBpZiAoJCgnLmFsZXJ0LmFsZXJ0LWRhbmdlcicpLmxlbmd0aCkge1xuICAgICAgJCgnLmFsZXJ0LmFsZXJ0LWRhbmdlcicpLnNob3coKVxuICAgIH0gZWxzZSB7XG4gICAgICAkKHRoaXMpLnByZXBlbmQoJzxkaXYgcm9sZT1cImFsZXJ0XCIgY2xhc3M9XCJhbGVydCBhbGVydC1kYW5nZXJcIj5BbGwgZmllbGRzIHJlcXVpcmVkLiBWYWxpZGF0ZWQgYnkgalF1ZXJ5PC9kaXY+JylcbiAgICB9XG4gICAgcmV0dXJuIGZhbHNlXG4gIH1cbn0pXG4iXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0=
+;(function() {
+"use strict";
+
+angular
+  .module('kkangst')
+  .controller('homeCtrl', homeCtrl)
+
+homeCtrl.$inject = ['kkangstData']
+function homeCtrl (kkangstData) {
+  var vm = this
+  vm.pageHeader = {
+    title: 'LMS',
+    strapline: 'Оберіть курси, які вам потрібні'
+  }
+  vm.sidebar = {
+    content: 'Цей сервіс допоможе вам обрати потрібні шляхи навчання і самостійного вдосконалення'
+  }
+  vm.message = 'Шукаємо курси...'
+  kkangstData.getCourses()
+    .success(function (data) {
+      vm.message = data.length > 0 ? '' : 'Курсів не знайдено'
+      vm.courses = data
+    })
+    .error(function (e) {
+      vm.message = 'Вибачте, щось пішло не так'
+      console.log(e)
+    })
+}
+}());
+
+;(function() {
+"use strict";
+
+angular
+  .module('kkangst')
+  .controller('courseDetailCtrl', courseDetailCtrl)
+
+courseDetailCtrl.$inject = ['$routeParams', '$uibModal', 'kkangstData']
+function courseDetailCtrl ($routeParams, $uibModal, kkangstData) {
+  var vm = this
+  vm.courseid = $routeParams.courseid
+
+  kkangstData.courseById(vm.courseid)
+    .success(function (data) {
+      vm.data = { course: data }
+      vm.pageHeader = {
+        title: vm.data.course.name
+      }
+    })
+    .error(function (e) {
+      console.log(e)
+    })
+
+  vm.popupReviewForm = function () {
+    var modalInstance = $uibModal.open({
+      templateUrl: '../html/reviewModal/reviewModal.view.html',
+      controller: 'reviewModalCtrl as vm',
+      resolve: {
+        courseData: function () {
+          return {
+            courseid: vm.courseid,
+            courseName: vm.data.course.name
+          }
+        }
+      }
+    })
+    modalInstance.result.then(function (data) {
+      vm.data.course.reviews.push(data)
+    })
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+angular
+  .module('kkangst')
+  .controller('reviewModalCtrl', reviewModalCtrl)
+
+reviewModalCtrl.$inject = ['$uibModalInstance', 'kkangstData', 'courseData']
+
+function reviewModalCtrl ($uibModalInstance, kkangstData, courseData) {
+  var vm = this
+  vm.courseData = courseData
+
+  vm.onSubmit = function () {
+    // reset any existing error messages:
+    vm.formError = ""
+
+    if (!vm.formData.name || !vm.formData.rating || !vm.formData.reviewText) {
+      // set an error message
+      vm.formError = 'All fields required, please try again'
+      return false
+    } else {
+      // on successful form submission send details to new function:
+      vm.doAddReview(vm.courseData.courseid, vm.formData)
+    }
+  }
+
+  vm.doAddReview = function (courseid, formData) {
+    kkangstData.addReviewById(courseid, {
+      author: formData.name,
+      rating: formData.rating,
+      reviewText: formData.reviewText
+    })
+      .success(function(data) {
+        vm.modal.close(data)
+      })
+      .error(function () {
+        vm.formError = "Your review has not been saved, please try again"
+      })
+    return false
+  }
+
+
+  vm.modal = {
+    close: function (result) {
+      $uibModalInstance.close(result)
+    },
+    cancel: function () {
+      $uibModalInstance.dismiss('cancel')
+    }
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+angular
+  .module('kkangst')
+  .directive('ratingStars', ratingStars)
+
+function ratingStars () {
+  return {
+    restrict: 'EA',
+    scope: {
+      thisRating: '=rating'
+    },
+    templateUrl: '../html/directives/ratingStars/ratingStars.template.html'
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+angular
+  .module('kkangst')
+  .directive('footerGeneric', footerGeneric)
+
+function footerGeneric () {
+  return {
+    restrict: 'EA',
+    templateUrl: '../html/directives/footerGeneric/footerGeneric.template.html'
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+angular
+  .module('kkangst')
+  .directive('navigation', navigation)
+
+function navigation () {
+  return {
+    restrict: 'EA',
+    templateUrl: '../html/directives/navigation/navigation.template.html'
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+angular
+  .module('kkangst')
+  .directive('pageHeader', pageHeader)
+
+function pageHeader () {
+  return {
+    restrict: 'EA',
+    scope: {
+      content : '=content'
+    },
+    templateUrl: '../html/directives/pageHeader/pageHeader.template.html'
+  }
+}
+}());
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5qcyIsImtrYW5nc3REYXRhLnNlcnZpY2UuanMiLCJhZGRIdG1sTGluZUJyZWFrcy5maWx0ZXIuanMiLCJmb3JtYXREaXN0YW5jZS5maWx0ZXIuanMiLCJhYm91dC5jb250cm9sbGVyLmpzIiwidmFsaWRhdGlvbi5qcyIsImhvbWUuY29udHJvbGxlci5qcyIsImNvdXJzZURldGFpbC5jb250cm9sbGVyLmpzIiwicmV2aWV3TW9kYWwuY29udHJvbGxlci5qcyIsInJhdGluZ1N0YXJzLmRpcmVjdGl2ZS5qcyIsImZvb3RlckdlbmVyaWMuZGlyZWN0aXZlLmpzIiwibmF2aWdhdGlvbi5kaXJlY3RpdmUuanMiLCJwYWdlSGVhZGVyLmRpcmVjdGl2ZS5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Ozs7OztBQ2hDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Ozs7OztBQ3ZCQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7O0FDVEE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Ozs7OztBQ3hCQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7QUNiQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7QUNWQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7O0FDeEJBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Ozs7OztBQ3JDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7O0FDaERBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7QUNaQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7O0FDVEE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Ozs7OztBQ1RBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwiZmlsZSI6ImFwcC5qcyIsInNvdXJjZVJvb3QiOiIvc291cmNlLyIsInNvdXJjZXNDb250ZW50IjpbImFuZ3VsYXIubW9kdWxlKCdra2FuZ3N0JywgWyduZ1JvdXRlJywgJ25nU2FuaXRpemUnLCAndWkuYm9vdHN0cmFwJ10pXG5cbmZ1bmN0aW9uIGNvbmZpZyAoJHJvdXRlUHJvdmlkZXIsICRsb2NhdGlvblByb3ZpZGVyKSB7XG4gICRyb3V0ZVByb3ZpZGVyXG4gICAgLndoZW4oJy8nLCB7XG4gICAgICB0ZW1wbGF0ZVVybDogJy4uL2h0bWwvaG9tZS9ob21lLnZpZXcuaHRtbCcsXG4gICAgICBjb250cm9sbGVyOiAnaG9tZUN0cmwnLFxuICAgICAgY29udHJvbGxlckFzOiAndm0nXG4gICAgfSlcbiAgICAud2hlbignL2Fib3V0Jywge1xuICAgICAgdGVtcGxhdGVVcmw6ICcuLi9odG1sL2NvbW1vbi92aWV3cy9nZW5lcmljVGV4dC52aWV3Lmh0bWwnLFxuICAgICAgY29udHJvbGxlcjogJ2Fib3V0Q3RybCcsXG4gICAgICBjb250cm9sbGVyQXM6ICd2bSdcbiAgICB9KVxuICAgIC53aGVuKCcvY291cnNlLzpjb3Vyc2VpZCcsIHtcbiAgICAgIHRlbXBsYXRlVXJsOiAnLi4vaHRtbC9jb3Vyc2VEZXRhaWwvY291cnNlRGV0YWlsLnZpZXcuaHRtbCcsXG4gICAgICBjb250cm9sbGVyOiAnY291cnNlRGV0YWlsQ3RybCcsXG4gICAgICBjb250cm9sbGVyQXM6ICd2bSdcbiAgICB9KVxuICAgIC5vdGhlcndpc2Uoe3JlZGlyZWN0VG86ICcvJ30pXG4gICRsb2NhdGlvblByb3ZpZGVyLmh0bWw1TW9kZSh0cnVlKVxufVxuXG52YXIgbWFpbkN0cmwgPSBmdW5jdGlvbiAoKSB7XG4gIHZhciB2bSA9IHRoaXNcbiAgdm0uYXV0aG9yID0gJ9CS0ZbRgtGPINCa0L7RgtGD0YHQtdC90LrQvidcbiAgdm0ueWVhciA9IDE5NzRcbn1cblxuYW5ndWxhclxuICAubW9kdWxlKCdra2FuZ3N0JylcbiAgLmNvbmZpZyhbJyRyb3V0ZVByb3ZpZGVyJywgJyRsb2NhdGlvblByb3ZpZGVyJywgY29uZmlnXSlcbiAgLmNvbnRyb2xsZXIoJ21haW5DdHJsJywgbWFpbkN0cmwpXG4iLG51bGwsbnVsbCxudWxsLG51bGwsIiQoJyNhZGRSZXZpZXcnKS5zdWJtaXQoZnVuY3Rpb24gKGUpIHtcbiAgJCgnLmFsZXJ0LmFsZXJ0LWRhbmdlcicpLmhpZGUoKVxuICBpZiAoISQoJ2lucHV0I25hbWUnKS52YWwoKSB8fCAhJCgnc2VsZWN0I3JhdGluZycpLnZhbCgpIHx8ICEkKCd0ZXh0YXJlYSNyZXZpZXcnKS52YWwoKSkge1xuICAgIGlmICgkKCcuYWxlcnQuYWxlcnQtZGFuZ2VyJykubGVuZ3RoKSB7XG4gICAgICAkKCcuYWxlcnQuYWxlcnQtZGFuZ2VyJykuc2hvdygpXG4gICAgfSBlbHNlIHtcbiAgICAgICQodGhpcykucHJlcGVuZCgnPGRpdiByb2xlPVwiYWxlcnRcIiBjbGFzcz1cImFsZXJ0IGFsZXJ0LWRhbmdlclwiPkFsbCBmaWVsZHMgcmVxdWlyZWQuIFZhbGlkYXRlZCBieSBqUXVlcnk8L2Rpdj4nKVxuICAgIH1cbiAgICByZXR1cm4gZmFsc2VcbiAgfVxufSlcbiJdfQ==

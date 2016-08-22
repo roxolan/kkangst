@@ -5,12 +5,12 @@ const favicon = require('serve-favicon')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-const passport = require('passport')
+var passport = require('passport')
 
 require('./src/api/models/db')
 require('./src/api/config/passport')
 
-const routes = require('./src/server/routes/index')
+// const routes = require('./src/server/routes/index')
 const routesApi = require('./src/api/routes/index')
 
 const app = express()

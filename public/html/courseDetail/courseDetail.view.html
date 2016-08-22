@@ -1,0 +1,76 @@
+<navigation></navigation>
+
+
+<div class="container">
+  <page-header content="vm.pageHeader"></page-header>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-9">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <p class="rating" rating-stars rating="vm.data.course.rating"></p>
+          <p>{{ vm.data.course.address }}</p>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h2 class="panel-title">Заняття</h2>
+            </div>
+            <div class="panel-body">
+              <p ng-repeat="time in vm.data.course.classTimes">
+                {{ time.day }}, {{ time.date }}, {{ time.timing }}, {{ time.room }}
+              </p>
+            </div>
+          </div>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h2 class="panel-title">Групи</h2>
+            </div>
+            <div class="panel-body">
+              <span class="label label-warning label-group" ng-repeat="group in vm.data.course.groups">
+                <span class="glyphicon glyphicon-ok"></span>
+                {{ group }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 location-map">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h2 class="panel-title">Розташування</h2>
+            </div>
+            <div class="panel-body">
+              <img src="http://maps.googleapis.com/maps/api/staticmap?center=50.466204,30.523300&zoom=17&size=400x350&sensor=false&markers=50.466204,30.523300&scale=2" class="img-responsive img-rounded">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-primary review-panel">
+            <div class="panel-heading"><a ng-click="vm.popupReviewForm()" class="btn btn-default pull-right">Додати коментар</a>
+              <h2 class="panel-title">Коментарі</h2>
+            </div>
+            <div class="panel-body review-container">
+              <div class="row">
+                <div class="review" ng-repeat="review in vm.data.course.reviews | orderBy:'createdOn':true">
+                  <div class="well well-sm review-header">
+                    <span class="rating" rating-stars rating="review.rating"></span>
+                    <span class="reviewAuthor">{{ review.author }}</span>
+                    <small class="reviewTimestamp">{{ review.createdOn | date : 'd MMMM yyyy' }}</small>
+                  </div>
+                  <div class="col-xs-12">
+                    <p ng-bind-html="review.reviewText | addHtmlLineBreaks"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-3">
+      <p class="lead">{{ vm.data.course.name }} - курс, що є фундаментальним для цілої програми навчання в Школі</p>
+      <p>Якщо ви пройшли цей курс і маєте що сказати - прохання залишити коментар. Це передається з вугловатої бібліотеки</p>
+    </div>
+  </div>
+  <footer-generic></footer-generic>
+</div>

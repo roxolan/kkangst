@@ -4,15 +4,15 @@ angular
 
 kkangstData.$inject = ['$http']
 function kkangstData ($http) {
-  const getCourses = function () {
+  var getCourses = function () {
     return $http.get('/api/courses')
   }
 
-  const courseById = function (courseid) {
+  var courseById = function (courseid) {
     return $http.get('/api/courses/' + courseid)
   }
 
-  const addReviewById = function (courseid, reviewData) {
+  var addReviewById = function (courseid, reviewData) {
     return $http.post('/api/courses/' + courseid + '/reviews', reviewData)
   }
 
